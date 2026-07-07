@@ -188,7 +188,7 @@ class GazeData:
             return self.get_trigger(f"SENTENCE_OFFSET_PRES{pres}")
         return self.df[self.df["USER"].str.startswith("SENTENCE_OFFSET", na=False)][["CNT", "TIME", "USER"]].reset_index(drop=True)
 
-    def gaze_during_sentence(self, pres):
+    def gaze_during_pres(self, pres):
         """Return all gaze samples between SENTENCE_ONSET and SENTENCE_OFFSET for a given presentation."""
         onset  = self.sentence_onsets(pres)
         offset = self.sentence_offsets(pres)
@@ -230,7 +230,7 @@ class GazeData:
     
     def get_fixation_sequence(self, pres):
         """Return one row per fixation (deduplicated, time-ordered) during the sentence reading window."""
-        segment = self.gaze_during_sentence(pres)
+        segment = self.gaze_during_pres(pres)
         fix = (segment[segment["FPOGV"] == 1]
                .drop_duplicates("FPOGID")
                .sort_values("TIME")
@@ -439,7 +439,7 @@ class GazeData:
         """Return pupil diameter stats per presentation (averaged across both valid eyes)."""
         rows = []
         for pres in range(self.n_presentations()):
-            segment = self.gaze_during_sentence(pres)
+            segment = self.gaze_during_pres(pres)
             left  = segment[segment["LPV"] == 1]["LPD"]
             right = segment[segment["RPV"] == 1]["RPD"]
             both  = pd.concat([left, right])
@@ -473,14 +473,16 @@ class GazeData:
     def gaze_on_screen(self, df_position):
         """Return gaze samples per presentation and line for all presentations.
         Returns dict: {(pres, part_nr): {line_idx: df_of_gaze_samples}}"""
-        
+
         self.all_results = {}
+        self._df_gaze_by_pres = {}   # keep raw gaze per presentation for gaze_regression()
+        self._boxes_by_pres = {}     # keep normalized box coords per presentation
 
         for pres in df_position["presentation_index"].unique():
             df_pres = df_position[df_position["presentation_index"] == pres].copy()
 
             try:
-                df_gaze = self.gaze_during_sentence(pres)
+                df_gaze = self.gaze_during_pres(pres)
             except ValueError:
                 print(f"Warning: no gaze data found for presentation {pres}, skipping.")
                 continue
@@ -489,6 +491,9 @@ class GazeData:
             df_pres["bottom_norm"] = df_pres["bottom"] / SCREEN_H
             df_pres["left_norm"]   = df_pres["left"]   / SCREEN_W
             df_pres["right_norm"]  = df_pres["right"]  / SCREEN_W
+
+            self._df_gaze_by_pres[pres] = df_gaze
+            self._boxes_by_pres[pres] = df_pres
 
             for part_nr, df_part in df_pres.groupby("part_nr"):
                 line_results = {}
@@ -505,7 +510,67 @@ class GazeData:
                 self.all_results[(pres, part_nr)] = line_results
 
         return self.all_results  # {(pres, part_nr): {line_idx: df}}
+    
+    def get_reg_gaze(self, pres):
+        if self.gaze_reg is None:
+            self.gaze_regression()
+        return self.gaze_reg.get((pres, 1), {}) 
 
+
+    def gaze_regression(self, part1_nr=1, part2_nr=2, time_col="TIME"):
+        """
+        Identify gaze 'regressions': samples timestamped after part 2 has started,
+        but spatially landing within part 1's boxes.
+
+        For each presentation, part-2 start time = the earliest timestamp among
+        gaze samples already found (in gaze_on_screen) to fall inside ANY part-2 box.
+
+        Returns dict: {(pres, part1_nr): {line_idx: df_of_gaze_samples}}
+        Each df keeps all original gaze/trigger columns intact.
+        """
+        if not self.all_results:
+            raise ValueError("gaze_on_screen() must be called first to compute results.")
+
+        self.gaze_reg = {}
+
+        for pres, df_gaze in self._df_gaze_by_pres.items():
+            part2_key = (pres, part2_nr)
+            if part2_key not in self.all_results:
+                continue  # no part 2 in this presentation
+
+            part2_timestamps = [
+                df_line[time_col].min()
+                for df_line in self.all_results[part2_key].values()
+                if not df_line.empty
+            ]
+            if not part2_timestamps:
+                print(f"Warning: no gaze landed on part 2 boxes for presentation {pres}, skipping.")
+                continue
+
+            t_part2_start = min(part2_timestamps)
+
+            # all gaze samples timestamped after part 2 began
+            df_after = df_gaze[df_gaze[time_col] >= t_part2_start]
+
+            # part 1's boxes for this presentation
+            df_part1_boxes = self._boxes_by_pres[pres]
+            df_part1_boxes = df_part1_boxes[df_part1_boxes["part_nr"] == part1_nr]
+
+            line_results = {}
+            for _, line in df_part1_boxes.iterrows():
+                mask = (
+                    (df_after["BPOGX"] >= line["left_norm"])  &
+                    (df_after["BPOGX"] <= line["right_norm"]) &
+                    (df_after["BPOGY"] >= line["top_norm"])   &
+                    (df_after["BPOGY"] <= line["bottom_norm"]) &
+                    (df_after["BPOGV"] == 1)
+                )
+                line_results[line["line_idx"]] = df_after[mask].reset_index(drop=True)
+
+            self.gaze_reg[(pres, part1_nr)] = line_results
+
+        return self.gaze_reg  # {(pres, part1_nr): {line_idx: df}}
+        
     
     def _fontsize_for_box(self, fig, ax, text, box_width_px, box_height_px, font_px=40):
         """Return a font size in points that stays within a box."""
@@ -628,108 +693,41 @@ class GazeData:
         font_size = (box_width_px - spacing_total) / (n_chars * char_width_ratio)
         return max(font_size, 1)  # guard against negative/zero from bad data
 
-    def plot_gaze_on_text(self, df_position, pres, results=None, font_px=40):
+    def plot_gaze_on_text(self, df_position, pres, results=None, gaze_reg=None, font_px=40):
         df_pres = df_position[df_position["presentation_index"] == pres].copy()
+
         if results is None:
             results = self.gaze_on_screen(df_position)
+        if gaze_reg is None:
+            gaze_reg = self.gaze_regression()
 
-        # ── Compute Y ranges for each part (normalised) ──────────────
-        part1_rows = df_pres[df_pres["part_nr"] == 1]
-        part2_rows = df_pres[df_pres["part_nr"] == 2]
-
-        part1_top    = part1_rows["top"].min()    / SCREEN_H
-        part1_bottom = part1_rows["bottom"].max() / SCREEN_H
-        part2_top    = part2_rows["top"].min()    / SCREEN_H
-        part2_bottom = part2_rows["bottom"].max() / SCREEN_H
-
-        # ── Collect ALL gaze samples in time order ────────────────────
+        # ── All gaze samples (both parts) ──────────────────────────────
         all_gaze = []
         for part_nr, df_part in df_pres.groupby("part_nr"):
             line_results = results.get((pres, part_nr), {})
             for _, line in df_part.iterrows():
                 gaze = line_results.get(line["line_idx"], pd.DataFrame())
                 if not gaze.empty:
-                    gaze = gaze.copy()
-                    gaze["part_nr"] = part_nr
-                    gaze["line_idx"] = line["line_idx"]
                     all_gaze.append(gaze)
 
         if not all_gaze:
             print(f"No gaze data for presentation {pres}")
             return
 
-        all_gaze = pd.concat(all_gaze).sort_values("TIME").reset_index(drop=True)
+        all_gaze = pd.concat(all_gaze).reset_index(drop=True)
 
-        # ── Classify each sample ──────────────────────────────────────
-        # Category 1: normal reading (crimson)
-        # Category 2: regression from sentence 2 back up to sentence 1 (orange)
-        # Category 3: first fixation(s) after returning from regression (green)
+        # ── Regression gaze samples for this presentation ──────────────
+        reg_line_results = gaze_reg.get((pres, 1), {})
+        reg_gaze = [df for df in reg_line_results.values() if not df.empty]
+        reg_gaze = pd.concat(reg_gaze).reset_index(drop=True) if reg_gaze else pd.DataFrame()
 
-        def classify_sample(y):
-            """Which sentence Y range does this sample fall in?"""
-            if part1_top <= y <= part1_bottom:
-                return 1
-            elif part2_top <= y <= part2_bottom:
-                return 2
-            else:
-                return 0  # between sentences or outside
+        # ── Debug: tell us what we actually have ────────────────────────
+        print(f"[pres {pres}] total gaze samples: {len(all_gaze)}")
+        print(f"[pres {pres}] presentations available in gaze_reg: {list(gaze_reg.keys())}")
+        print(f"[pres {pres}] lines available in gaze_reg[({pres}, 1)]: {list(reg_line_results.keys())}")
+        print(f"[pres {pres}] regression samples: {len(reg_gaze)}")
 
-        all_gaze["in_part"] = all_gaze["BPOGY"].apply(classify_sample)
-
-        # ── Compute gap between sentences (normalised) ────────────────
-        gap_normalised = (part2_top - part1_bottom)
-        WINDOW = 15  # rolling average window
-
-        print(f"part1_bottom: {part1_bottom:.3f}")
-        print(f"part2_top:    {part2_top:.3f}")
-        print(f"gap:          {gap_normalised:.3f}")
-
-        # ── Classify each sample ──────────────────────────────────────
-        categories = []
-        in_regression = False
-
-        for i, row in all_gaze.iterrows():
-            y = row["BPOGY"]
-
-            # Not enough samples yet → normal
-            if i < WINDOW:
-                categories.append("normal")
-                continue
-
-            # Rolling mean of last WINDOW samples
-            rolling_mean = all_gaze.loc[i - WINDOW:i - 1, "BPOGY"].mean()
-
-            # Significant jump upward (smaller Y = higher on screen)
-            jumped_up = (rolling_mean - y) >= gap_normalised
-
-            if jumped_up and not in_regression:
-                # Entering regression
-                in_regression = True
-                categories.append("regression")
-
-            elif in_regression and not jumped_up:
-                # First sample back down after regression → post_regression
-                in_regression = False
-                categories.append("post_regression")
-
-            elif in_regression and jumped_up:
-                # Still in regression
-                categories.append("regression")
-
-            else:
-                # Normal reading
-                categories.append("normal")
-
-        all_gaze["category"] = categories
-
-        # ── Colours ───────────────────────────────────────────────────
-        colour_map = {
-            "normal":          "crimson",
-            "regression":      "orange",
-            "post_regression": "dodgerblue"
-        }
-
-        # ── Plot ──────────────────────────────────────────────────────
+        # ── Plot ─────────────────────────────────────────────────────
         fig_width = 12
         fig_height = fig_width * (SCREEN_H / SCREEN_W)
         fig, ax = plt.subplots(figsize=(fig_width, fig_height))
@@ -747,43 +745,42 @@ class GazeData:
                     (line["left"], line["top"]),
                     line["right"] - line["left"],
                     line["bottom"] - line["top"],
-                    linewidth=1, edgecolor="steelblue", facecolor="aliceblue", alpha=0.4
+                    linewidth=1, edgecolor="steelblue", facecolor="aliceblue", alpha=0.4,
+                    zorder=1
                 )
                 ax.add_patch(rect)
 
                 box_width_px = max(1, line["right"] - line["left"])
                 box_height_px = max(1, line["bottom"] - line["top"])
                 fontsize_pt = self._fontsize_for_box(
-                    fig,
-                    ax,
-                    line["text"],
-                    box_width_px,
-                    box_height_px,
-                    font_px=font_px,
+                    fig, ax, line["text"], box_width_px, box_height_px, font_px=font_px,
                 )
 
                 x_center = (line["left"] + line["right"]) / 2
                 y_center = (line["top"] + line["bottom"]) / 2
                 ax.text(
-                    x_center, y_center,
-                    line["text"],
-                    fontsize=fontsize_pt,
-                    family="monospace",
-                    color="#111111",
-                    ha="center", va="center",
-                    zorder=2
+                    x_center, y_center, line["text"],
+                    fontsize=fontsize_pt, family="monospace", color="#111111",
+                    ha="center", va="center", zorder=2
                 )
 
-        # Draw gaze samples with colours
-        for category, colour in colour_map.items():
-            subset = all_gaze[all_gaze["category"] == category]
-            if not subset.empty:
-                ax.scatter(
-                    subset["BPOGX"] * SCREEN_W,
-                    subset["BPOGY"] * SCREEN_H,
-                    s=15, alpha=0.5, color=colour, zorder=3,
-                    label=category
-                )
+        # All gaze in grey (base layer)
+        ax.scatter(
+            all_gaze["BPOGX"] * SCREEN_W,
+            all_gaze["BPOGY"] * SCREEN_H,
+            s=15, alpha=0.4, color="grey", zorder=3, label="gaze"
+        )
+
+        # Regressions in yellow, drawn last, on top, bigger + outlined
+        if not reg_gaze.empty:
+            ax.scatter(
+                reg_gaze["BPOGX"] * SCREEN_W,
+                reg_gaze["BPOGY"] * SCREEN_H,
+                s=60, alpha=0.9, color="yellow", edgecolor="black", linewidth=0.6,
+                zorder=5, label="regression"
+            )
+        else:
+            print(f"[pres {pres}] WARNING: no regression samples found — nothing yellow to plot.")
 
         ax.legend(loc="upper right")
         plt.tight_layout()
