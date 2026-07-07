@@ -1,0 +1,1289 @@
+"rt","stimulus","response","trial_type","trial_index","time_elapsed","internal_node_id","value","task","sentence_first","sentence_second","presentation_index","rt_ms","sentence","catch_index","sentence_position","catch_type","response_label","correct_response","correct"
+"21898","
+      <div class=""instructions"">
+        <h2>Expérience de lecture avec suivi eye-tracker</h2>
+        <p>Cette expérience enregistre les mouvements de vos yeux pendant que vous lisez des phrases.</p>
+        <p><strong>Avant de commencer :</strong> Asseyez-vous confortablement à environ 60 cm de l'écran</p>
+        <p>Cliquez sur la touche <strong>ESPACE</strong> pour continuer.</p>
+      </div>
+    "," ","html-keyboard-response","0","21899","0.0-0.0","","","","","","","","","","","","",""
+"","","","call-function","1","21902","0.0-1.0","{""success"":true}","","","","","","","","","","","",""
+"19196","
+      <div class=""instructions"">
+        <h2>Calibration</h2>
+        <p>Un écran de calibration apparaîtra dans la fenêtre.</p>
+        <p>Suivez le point en mouvement avec vos yeux (sans bouger la tête) et sans prédire où il va.</p>
+        <p>Puis un écran apparaîtra, dans lequel vous pouvez vérifier si le point vert suit votre regard sur l'écran.</p>
+        <p>Si la calibration échoue, une deuxième tentative sera effectuée.</p>
+        <p>Appelez l'administrateur si vous recontrez des problèmes.</p>
+        <p>Appuyez sur la touche <strong>ESPACE</strong> pour lancer la calibration et attendez 2 secondes.</p>
+      </div>
+    "," ","html-keyboard-response","2","41098","0.0-2.0","","","","","","","","","","","","",""
+"","","","call-function","3","62626","0.0-3.0","","","","","","","","","","","","",""
+"28629","
+      <div class=""instructions"">
+        <h2>L'expérience va commencer</h2>
+        <p>Lorsque vous avez terminé de lire, appuyez sur la touche <strong>ESPACE</strong> pour passer aux phrases suivantes.</p>
+        <p>Entre les phrases, un point de fixation apparaîtra au centre de l'écran pendant 2 secondes. Veuillez le regarder jusqu'à ce que la phrase suivante s'affiche.</p>
+        <p>Il y aura 4 pauses au cours de l'expérience. Vous pourrez vous détendre un instant avant de poursuivre avec une nouvelle calibration.</p>
+        <p>Des questions vous seront également posées, auxquelles vous répondrez en utilisant les flèches du clavier.</p>
+        <p>Appuyez sur la touche <strong>ESPACE</strong> lorsque vous êtes prêt(e) à commencer.</p>
+      </div>
+    "," ","html-keyboard-response","4","91255","0.0-4.0","","","","","","","","","","","","",""
+"","","","call-function","5","91256","0.0-5.0","","","","","","","","","","","","",""
+"","","","call-function","6","91256","0.0-6.0","","","","","","","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","7","93257","0.0-7.0-0.0","","","","","","","","","","","","",""
+"13006","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Eva planifie un city-trip à San Francisco.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Elle voudrait trouver un vol pas cher.</div>
+          </div>
+        "," ","html-keyboard-response","8","106263","0.0-7.0-1.0","","reading","Eva planifie un city-trip à San Francisco.","Elle voudrait trouver un vol pas cher.","0","13006","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","9","108263","0.0-7.0-2.0","","","","","","","","","","","","",""
+"7087","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Jeanne fait des activités touristiques.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Elle prend beaucoup de selfies.</div>
+          </div>
+        "," ","html-keyboard-response","10","115351","0.0-7.0-3.0","","reading","Jeanne fait des activités touristiques.","Elle prend beaucoup de selfies.","1","7087","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","11","117351","0.0-7.0-4.0","","","","","","","","","","","","",""
+"20895","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Elena est de sortie en ville lorsque sa mère l'appelle en panique pour lui demander si elle est bien en sécurité. Elle poursuit, confuse, en criant que quelque chose d'horrible vient d'arriver au centre-ville.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">La mère d'Elena lui dit qu'il y a eu une attaque à la bombe et qu'elle doit rentrer à la maison le plus vite possible.</div>
+          </div>
+        "," ","html-keyboard-response","12","138244","0.0-7.0-5.0","","reading","Elena est de sortie en ville lorsque sa mère l'appelle en panique pour lui demander si elle est bien en sécurité. Elle poursuit, confuse, en criant que quelque chose d'horrible vient d'arriver au centre-ville.","La mère d'Elena lui dit qu'il y a eu une attaque à la bombe et qu'elle doit rentrer à la maison le plus vite possible.","2","20895","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","13","140245","0.0-7.0-6.0","","","","","","","","","","","","",""
+"11103","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Erik vient d'acheter des sneakers super rares et il a hâte de voir la tête de ses amis quand il leur dira ce soir.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Les amis d'Erik adorent sa nouvelle paire et le complimentent sur son goût.</div>
+          </div>
+        "," ","html-keyboard-response","14","151348","0.0-7.0-7.0","","reading","Erik vient d'acheter des sneakers super rares et il a hâte de voir la tête de ses amis quand il leur dira ce soir.","Les amis d'Erik adorent sa nouvelle paire et le complimentent sur son goût.","3","11103","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","15","153349","0.0-7.0-8.0","","","","","","","","","","","","",""
+"8527","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Il est 4 heures du matin et John est sur le point de s'endormir lorsqu'il entend des coups de feu.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Il sursaute de son lit et regarde par sa fenêtre.</div>
+          </div>
+        "," ","html-keyboard-response","16","161876","0.0-7.0-9.0","","reading","Il est 4 heures du matin et John est sur le point de s'endormir lorsqu'il entend des coups de feu.","Il sursaute de son lit et regarde par sa fenêtre.","4","8527","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","17","163877","0.0-7.0-10.0","","","","","","","","","","","","",""
+"18032","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">La valise de Marco, contenant tous ses habits favoris, a été perdue lors de son voyage en avion.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Marco reçoit un appel de la compagnie aérienne lui disant qu'ils sont dans l'incapacité de trouver sa valise et qu'il sera remboursé à la hauteur de 300 euros pour les dommages occasionnés.</div>
+          </div>
+        "," ","html-keyboard-response","18","181909","0.0-7.0-11.0","","reading","La valise de Marco, contenant tous ses habits favoris, a été perdue lors de son voyage en avion.","Marco reçoit un appel de la compagnie aérienne lui disant qu'ils sont dans l'incapacité de trouver sa valise et qu'il sera remboursé à la hauteur de 300 euros pour les dommages occasionnés.","5","18032","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","19","183906","0.0-7.0-12.0","","","","","","","","","","","","",""
+"11807","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Magnus doit rejoindre son ami pour prendre un café, il décide de regarder l'heure sur son portable.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Magnus sort son téléphone mais sa batterie est à plat.</div>
+          </div>
+        "," ","html-keyboard-response","20","195713","0.0-7.0-13.0","","reading","Magnus doit rejoindre son ami pour prendre un café, il décide de regarder l'heure sur son portable.","Magnus sort son téléphone mais sa batterie est à plat.","6","11807","","","","","","",""
+"11455","
+        <div style=""
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          width: 90vw;
+          max-width: 90vw;
+          box-sizing: border-box;
+          padding: 40px;
+          word-wrap: break-word;
+          overflow-wrap: break-word;
+          white-space: normal;
+        "">
+          <div style=""
+            font-family: 'Courier New', monospace;
+            font-size: 40px;
+            line-height: 2.2;
+            letter-spacing: 2px;
+            text-align: center;
+            color: #111;
+            width: 100%;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: normal;
+          "">Avez-vous vu la phrase suivante ?<br><br><em>Magnus doit rejoindre son ami pour prendre un café, il décide de regarder l'heure sur son portable. Magnus sort son téléphone mais sa batterie est à plat.</em></div>
+
+          <div style=""
+            display: flex;
+            flex-direction: row;
+            gap: 80px;
+            margin-top: 60px;
+            font-family: 'Courier New', monospace;
+            font-size: 28px;
+            color: #333;
+          "">
+            <div style=""text-align:center;"">
+              <div style=""font-size: 48px;"">↑</div>
+              <div>Oui</div>
+            </div>
+            <div style=""text-align:center;"">
+              <div style=""font-size: 48px;"">↓</div>
+              <div>Non</div>
+            </div>
+          </div>
+        </div>
+      ","arrowdown","html-keyboard-response","21","207169","0.0-7.0-14.0","","catch","Magnus doit rejoindre son ami pour prendre un café, il décide de regarder l'heure sur son portable.","Magnus sort son téléphone mais sa batterie est à plat.","","","Magnus doit rejoindre son ami pour prendre un café, il décide de regarder l'heure sur son portable. Magnus sort son téléphone mais sa batterie est à plat.","0","7","seen","Non","Oui","false"
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","22","209170","0.0-7.0-15.0","","","","","","","","","","","","",""
+"6943","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Lisa a travaillé assidûment pour sa thèse de master.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Elle a eu une très bonne note: 85% !</div>
+          </div>
+        "," ","html-keyboard-response","23","216113","0.0-7.0-16.0","","reading","Lisa a travaillé assidûment pour sa thèse de master.","Elle a eu une très bonne note: 85% !","7","6943","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","24","218114","0.0-7.0-17.0","","","","","","","","","","","","",""
+"3807","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Bruno rentre chez lui.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Il prend son bus.</div>
+          </div>
+        "," ","html-keyboard-response","25","221921","0.0-7.0-18.0","","reading","Bruno rentre chez lui.","Il prend son bus.","8","3807","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","26","223922","0.0-7.0-19.0","","","","","","","","","","","","",""
+"10863","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Mike est dans un supermarché lorsqu'un homme cagoulé et armé crie: 'Tout le monde au sol, ceci est un hold-up !'</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Les jambes de Mike commencent à trembler.</div>
+          </div>
+        "," ","html-keyboard-response","27","234785","0.0-7.0-20.0","","reading","Mike est dans un supermarché lorsqu'un homme cagoulé et armé crie: 'Tout le monde au sol, ceci est un hold-up !'","Les jambes de Mike commencent à trembler.","9","10863","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","28","236786","0.0-7.0-21.0","","","","","","","","","","","","",""
+"17295","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Il est 4 heures du matin et Mike s'apprête à aller dormir lorsque soudain il entend un homme crier 'Adieu monde cruel' suivi d'un bruit sourd.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Le souffle coupé, il se lève pour se rapprocher de sa fenêtre. Il a à peine le temps de se frotter les paupières qu'il voit son voisin étendu à terre, inerte.</div>
+          </div>
+        "," ","html-keyboard-response","29","254078","0.0-7.0-22.0","","reading","Il est 4 heures du matin et Mike s'apprête à aller dormir lorsque soudain il entend un homme crier 'Adieu monde cruel' suivi d'un bruit sourd.","Le souffle coupé, il se lève pour se rapprocher de sa fenêtre. Il a à peine le temps de se frotter les paupières qu'il voit son voisin étendu à terre, inerte.","10","17295","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","30","256079","0.0-7.0-23.0","","","","","","","","","","","","",""
+"14479","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Bertrand a joué à la loterie en utilisant ses numéros favoris pour tenter de gagner le jackpot de 4 000 000 €.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Il essaie de regarder le tirage de la loterie à la télé, mais il n'y a pas de signal.</div>
+          </div>
+        "," ","html-keyboard-response","31","270558","0.0-7.0-24.0","","reading","Bertrand a joué à la loterie en utilisant ses numéros favoris pour tenter de gagner le jackpot de 4 000 000 €.","Il essaie de regarder le tirage de la loterie à la télé, mais il n'y a pas de signal.","11","14479","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","32","272559","0.0-7.0-25.0","","","","","","","","","","","","",""
+"15247","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Emmanuel est supposé rejoindre son ami pour prendre un verre d'ici peu, donc il décide de vérifier l'heure qu'il est sur son téléphone.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Il est 16h30. Vite ! Il ne lui reste plus que 10 minutes pour le rejoindre.</div>
+          </div>
+        "," ","html-keyboard-response","33","287806","0.0-7.0-26.0","","reading","Emmanuel est supposé rejoindre son ami pour prendre un verre d'ici peu, donc il décide de vérifier l'heure qu'il est sur son téléphone.","Il est 16h30. Vite ! Il ne lui reste plus que 10 minutes pour le rejoindre.","12","15247","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","34","289807","0.0-7.0-27.0","","","","","","","","","","","","",""
+"7135","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Sam rentre à la maison.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Il enlève sa veste.</div>
+          </div>
+        "," ","html-keyboard-response","35","296942","0.0-7.0-28.0","","reading","Sam rentre à la maison.","Il enlève sa veste.","13","7135","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","36","298943","0.0-7.0-29.0","","","","","","","","","","","","",""
+"15327","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">La valise de Simon, contenant tous ses livres favoris, a été perdue par la compagnie aérienne lors de son dernier vol.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Simon commence à faire la queue pour réclamer sa valise aux objets trouvés.</div>
+          </div>
+        "," ","html-keyboard-response","37","314268","0.0-7.0-30.0","","reading","La valise de Simon, contenant tous ses livres favoris, a été perdue par la compagnie aérienne lors de son dernier vol.","Simon commence à faire la queue pour réclamer sa valise aux objets trouvés.","14","15327","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","38","316268","0.0-7.0-31.0","","","","","","","","","","","","",""
+"6511","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Tyler adore les sneakers.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Il décide d'en acheter une nouvelle paire.</div>
+          </div>
+        "," ","html-keyboard-response","39","322780","0.0-7.0-32.0","","reading","Tyler adore les sneakers.","Il décide d'en acheter une nouvelle paire.","15","6511","","","","","","",""
+"4832","
+        <div style=""
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          width: 90vw;
+          max-width: 90vw;
+          box-sizing: border-box;
+          padding: 40px;
+          word-wrap: break-word;
+          overflow-wrap: break-word;
+          white-space: normal;
+        "">
+          <div style=""
+            font-family: 'Courier New', monospace;
+            font-size: 40px;
+            line-height: 2.2;
+            letter-spacing: 2px;
+            text-align: center;
+            color: #111;
+            width: 100%;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: normal;
+          "">Avez-vous vu la phrase suivante ?<br><br><em>Sam rentre à la maison. Il enlève sa veste.</em></div>
+
+          <div style=""
+            display: flex;
+            flex-direction: row;
+            gap: 80px;
+            margin-top: 60px;
+            font-family: 'Courier New', monospace;
+            font-size: 28px;
+            color: #333;
+          "">
+            <div style=""text-align:center;"">
+              <div style=""font-size: 48px;"">↑</div>
+              <div>Oui</div>
+            </div>
+            <div style=""text-align:center;"">
+              <div style=""font-size: 48px;"">↓</div>
+              <div>Non</div>
+            </div>
+          </div>
+        </div>
+      ","arrowup","html-keyboard-response","40","327612","0.0-7.0-33.0","","catch","Tyler adore les sneakers.","Il décide d'en acheter une nouvelle paire.","","","Sam rentre à la maison. Il enlève sa veste.","1","16","seen","Oui","Oui","true"
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","41","329612","0.0-7.0-34.0","","","","","","","","","","","","",""
+"20576","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Clara est au centre-ville lorsque son père l'appelle, inquiet, en demandant si elle va bien car une fusillade a éclaté à la gare.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Clara essaie de le calmer et lui dit de la lâcher un peu. Il exagère toujours.</div>
+          </div>
+        "," ","html-keyboard-response","42","350188","0.0-7.0-35.0","","reading","Clara est au centre-ville lorsque son père l'appelle, inquiet, en demandant si elle va bien car une fusillade a éclaté à la gare.","Clara essaie de le calmer et lui dit de la lâcher un peu. Il exagère toujours.","16","20576","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","43","352188","0.0-7.0-36.0","","","","","","","","","","","","",""
+"7903","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Alexandre joue à la loterie chaque semaine.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Il achète toujours ses tickets chez le même vendeur.</div>
+          </div>
+        "," ","html-keyboard-response","44","360092","0.0-7.0-37.0","","reading","Alexandre joue à la loterie chaque semaine.","Il achète toujours ses tickets chez le même vendeur.","17","7903","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","45","362092","0.0-7.0-38.0","","","","","","","","","","","","",""
+"13215","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">La maman de Kevin lui envoie un message en lui demandant ce qu'il voudrait manger pour le dîner.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Il lui répond qu'il aimerait des lasagnes.</div>
+          </div>
+        "," ","html-keyboard-response","46","375305","0.0-7.0-39.0","","reading","La maman de Kevin lui envoie un message en lui demandant ce qu'il voudrait manger pour le dîner.","Il lui répond qu'il aimerait des lasagnes.","18","13215","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","47","377305","0.0-7.0-40.0","","","","","","","","","","","","",""
+"12639","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Tom regarde un match de foot avec son équipe préférée, ils pourraient gagner la Champions League !</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Les deux équipes jouent aussi bien l'une que l'autre, le match est très serré.</div>
+          </div>
+        "," ","html-keyboard-response","48","389945","0.0-7.0-41.0","","reading","Tom regarde un match de foot avec son équipe préférée, ils pourraient gagner la Champions League !","Les deux équipes jouent aussi bien l'une que l'autre, le match est très serré.","19","12639","","","","","","",""
+"55280","
+          <div class=""instructions"">
+            <h2>Pause — Recalibration</h2>
+            <p>Nous allons recalibrer le suivi oculaire.</p>
+            <p>Appuyez sur <strong>ESPACE</strong> pour lancer la recalibration.</p>
+          </div>
+        "," ","html-keyboard-response","49","445222","0.0-7.0-42.0","","","","","","","","","","","","",""
+"","","","call-function","50","457653","0.0-7.0-43.0","","","","","","","","","","","","",""
+"5152","
+          <div class=""instructions"">
+            <h2>Recalibration terminée</h2>
+            <p>Appuyez sur <strong>ESPACE</strong> pour continuer la lecture.</p>
+          </div>
+        "," ","html-keyboard-response","51","462806","0.0-7.0-44.0","","","","","","","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","52","464806","0.0-7.0-45.0","","","","","","","","","","","","",""
+"6591","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Lena fait son jogging dans un parc.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Elle croise beaucoup de gens qui font des pique-niques.</div>
+          </div>
+        "," ","html-keyboard-response","53","471398","0.0-7.0-46.0","","reading","Lena fait son jogging dans un parc.","Elle croise beaucoup de gens qui font des pique-niques.","20","6591","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","54","473399","0.0-7.0-47.0","","","","","","","","","","","","",""
+"17695","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Mario est avec un ami lorsqu'ils croisent une fille avec qui ils sont sortis en soirée, mais il ne se rappelle plus son prénom.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">L'ami de Mario lui glisse discrètement à l'oreille qu'elle s'appelle Diana.</div>
+          </div>
+        "," ","html-keyboard-response","55","491094","0.0-7.0-48.0","","reading","Mario est avec un ami lorsqu'ils croisent une fille avec qui ils sont sortis en soirée, mais il ne se rappelle plus son prénom.","L'ami de Mario lui glisse discrètement à l'oreille qu'elle s'appelle Diana.","21","17695","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","56","493097","0.0-7.0-49.0","","","","","","","","","","","","",""
+"7997","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Sam est sur Tinder.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Il croise des profils différents et décide s'il souhaite les 'matcher'.</div>
+          </div>
+        "," ","html-keyboard-response","57","501091","0.0-7.0-50.0","","reading","Sam est sur Tinder.","Il croise des profils différents et décide s'il souhaite les 'matcher'.","22","7997","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","58","503092","0.0-7.0-51.0","","","","","","","","","","","","",""
+"12351","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Comme chaque matin, Eva se promène lorsqu'elle entend une personne crier des mots dans une langue étrangère derrière elle.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Elle se retourne et voit qu'il s'agit d'un homme bourré qui se met à vomir sur le trottoir.</div>
+          </div>
+        "," ","html-keyboard-response","59","515443","0.0-7.0-52.0","","reading","Comme chaque matin, Eva se promène lorsqu'elle entend une personne crier des mots dans une langue étrangère derrière elle.","Elle se retourne et voit qu'il s'agit d'un homme bourré qui se met à vomir sur le trottoir.","23","12351","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","60","517444","0.0-7.0-53.0","","","","","","","","","","","","",""
+"14272","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Simon est avec un ami lorsqu'il croise une fille avec qui ils ont fait la fête toute la nuit il y a quelques semaines.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Ils discutent de tout et de rien.</div>
+          </div>
+        "," ","html-keyboard-response","61","531715","0.0-7.0-54.0","","reading","Simon est avec un ami lorsqu'il croise une fille avec qui ils ont fait la fête toute la nuit il y a quelques semaines.","Ils discutent de tout et de rien.","24","14272","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","62","533716","0.0-7.0-55.0","","","","","","","","","","","","",""
+"14831","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Nathan a joué à la loterie avec les mêmes numéros qu'il utilise à chaque fois. Cette semaine, il pourrait gagner 3 000 000 d'euros.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Nathan regarde ses numéros par rapport aux numéros gagnants... et c'est le jackpot !!! Il a tous les numéros gagnants, il est maintenant millionnaire !</div>
+          </div>
+        "," ","html-keyboard-response","63","548547","0.0-7.0-56.0","","reading","Nathan a joué à la loterie avec les mêmes numéros qu'il utilise à chaque fois. Cette semaine, il pourrait gagner 3 000 000 d'euros.","Nathan regarde ses numéros par rapport aux numéros gagnants... et c'est le jackpot !!! Il a tous les numéros gagnants, il est maintenant millionnaire !","25","14831","","","","","","",""
+"18672","
+        <div style=""
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          width: 90vw;
+          max-width: 90vw;
+          box-sizing: border-box;
+          padding: 40px;
+          word-wrap: break-word;
+          overflow-wrap: break-word;
+          white-space: normal;
+        "">
+          <div style=""
+            font-family: 'Courier New', monospace;
+            font-size: 40px;
+            line-height: 2.2;
+            letter-spacing: 2px;
+            text-align: center;
+            color: #111;
+            width: 100%;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: normal;
+          "">Avez-vous vu la phrase suivante ?<br><br><em>Mario est avec un ami lorsqu'ils croisent une fille avec qui ils sont sortis en soirée, mais il ne se rappelle plus son prénom. L'ami de Mario lui glisse discrètement à l'oreille qu'elle s'appelle Diana.</em></div>
+
+          <div style=""
+            display: flex;
+            flex-direction: row;
+            gap: 80px;
+            margin-top: 60px;
+            font-family: 'Courier New', monospace;
+            font-size: 28px;
+            color: #333;
+          "">
+            <div style=""text-align:center;"">
+              <div style=""font-size: 48px;"">↑</div>
+              <div>Oui</div>
+            </div>
+            <div style=""text-align:center;"">
+              <div style=""font-size: 48px;"">↓</div>
+              <div>Non</div>
+            </div>
+          </div>
+        </div>
+      ","arrowup","html-keyboard-response","64","567217","0.0-7.0-57.0","","catch","Nathan a joué à la loterie avec les mêmes numéros qu'il utilise à chaque fois. Cette semaine, il pourrait gagner 3 000 000 d'euros.","Nathan regarde ses numéros par rapport aux numéros gagnants... et c'est le jackpot !!! Il a tous les numéros gagnants, il est maintenant millionnaire !","","","Mario est avec un ami lorsqu'ils croisent une fille avec qui ils sont sortis en soirée, mais il ne se rappelle plus son prénom. L'ami de Mario lui glisse discrètement à l'oreille qu'elle s'appelle Diana.","2","26","seen","Oui","Oui","true"
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","65","569217","0.0-7.0-58.0","","","","","","","","","","","","",""
+"14975","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Adrien est réveillé par son chien qui aboie en pleine nuit. Il est surpris car son chien n'aboie jamais.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Il se dit qu'il devrait descendre vérifier ce qu'il se passe mais il est trop fatigué. Il retourne donc dormir, tant pis si ce sont des voleurs.</div>
+          </div>
+        "," ","html-keyboard-response","66","584193","0.0-7.0-59.0","","reading","Adrien est réveillé par son chien qui aboie en pleine nuit. Il est surpris car son chien n'aboie jamais.","Il se dit qu'il devrait descendre vérifier ce qu'il se passe mais il est trop fatigué. Il retourne donc dormir, tant pis si ce sont des voleurs.","26","14975","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","67","586193","0.0-7.0-60.0","","","","","","","","","","","","",""
+"11695","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Irene aimerait voyager, mais ne sachant pas où aller, elle décide de demander conseil à une agence de voyages.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">L'agent lui dit qu'il y a des promotions intéressantes pour Malaga, Barcelone et Rome.</div>
+          </div>
+        "," ","html-keyboard-response","68","597889","0.0-7.0-61.0","","reading","Irene aimerait voyager, mais ne sachant pas où aller, elle décide de demander conseil à une agence de voyages.","L'agent lui dit qu'il y a des promotions intéressantes pour Malaga, Barcelone et Rome.","27","11695","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","69","599889","0.0-7.0-62.0","","","","","","","","","","","","",""
+"11935","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Olivia fait un tour touristique lorsque quelque chose de mouillé tombe sur sa tête.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Elle touche ses cheveux et comprend qu'un pigeon lui a déféqué dessus.</div>
+          </div>
+        "," ","html-keyboard-response","70","611825","0.0-7.0-63.0","","reading","Olivia fait un tour touristique lorsque quelque chose de mouillé tombe sur sa tête.","Elle touche ses cheveux et comprend qu'un pigeon lui a déféqué dessus.","28","11935","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","71","613825","0.0-7.0-64.0","","","","","","","","","","","","",""
+"8687","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Mina vient de marcher sur quelque chose de collant.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Elle regarde sous sa chaussure et voit qu'un chewing-gum est collé à sa semelle.</div>
+          </div>
+        "," ","html-keyboard-response","72","622510","0.0-7.0-65.0","","reading","Mina vient de marcher sur quelque chose de collant.","Elle regarde sous sa chaussure et voit qu'un chewing-gum est collé à sa semelle.","29","8687","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","73","624510","0.0-7.0-66.0","","","","","","","","","","","","",""
+"12511","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Quelqu'un a dit à Cynthia que l'examen de physique quantique qu'elle redoutait a été annulé.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Elle envoie un e-mail à son professeur en lui demandant si c'est bien le cas. Ce dernier lui confirme que l'examen a été supprimé.</div>
+          </div>
+        "," ","html-keyboard-response","74","637022","0.0-7.0-67.0","","reading","Quelqu'un a dit à Cynthia que l'examen de physique quantique qu'elle redoutait a été annulé.","Elle envoie un e-mail à son professeur en lui demandant si c'est bien le cas. Ce dernier lui confirme que l'examen a été supprimé.","30","12511","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","75","639022","0.0-7.0-68.0","","","","","","","","","","","","",""
+"11999","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Jack rentre chez lui et entend des bruits suspects à l'étage. Il est inquiet car il habite seul.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Il marche sur la pointe des pieds en se rapprochant des escaliers.</div>
+          </div>
+        "," ","html-keyboard-response","76","651022","0.0-7.0-69.0","","reading","Jack rentre chez lui et entend des bruits suspects à l'étage. Il est inquiet car il habite seul.","Il marche sur la pointe des pieds en se rapprochant des escaliers.","31","11999","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","77","653022","0.0-7.0-70.0","","","","","","","","","","","","",""
+"11823","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Lukas a un nouveau 'match' sur Tinder.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Il ouvre l'application et découvre que c'est la jolie fille qu'il avait 'superlikée' plus tôt dans la journée.</div>
+          </div>
+        "," ","html-keyboard-response","78","664846","0.0-7.0-71.0","","reading","Lukas a un nouveau 'match' sur Tinder.","Il ouvre l'application et découvre que c'est la jolie fille qu'il avait 'superlikée' plus tôt dans la journée.","32","11823","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","79","666846","0.0-7.0-72.0","","","","","","","","","","","","",""
+"7135","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Cam attend son bus en espérant qu'il ne sera pas trop plein.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Le bus qui arrive est hors service, Cam continue à attendre.</div>
+          </div>
+        "," ","html-keyboard-response","80","673982","0.0-7.0-73.0","","reading","Cam attend son bus en espérant qu'il ne sera pas trop plein.","Le bus qui arrive est hors service, Cam continue à attendre.","33","7135","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","81","675982","0.0-7.0-74.0","","","","","","","","","","","","",""
+"12447","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Albert se dirige vers un 'blind-date' que son meilleur ami lui a organisé. À ce qu'il paraît, la fille qu'il va rencontrer est magnifique.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Lorsque Albert la voit arriver, il est immédiatement sous le charme.</div>
+          </div>
+        "," ","html-keyboard-response","82","688427","0.0-7.0-75.0","","reading","Albert se dirige vers un 'blind-date' que son meilleur ami lui a organisé. À ce qu'il paraît, la fille qu'il va rencontrer est magnifique.","Lorsque Albert la voit arriver, il est immédiatement sous le charme.","34","12447","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","83","690427","0.0-7.0-76.0","","","","","","","","","","","","",""
+"10031","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Max a un nouveau match sur Tinder !</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Il tente d'ouvrir l'application pour voir de qui il s'agit, mais son téléphone reste figé sur la page d'accueil.</div>
+          </div>
+        "," ","html-keyboard-response","84","700459","0.0-7.0-77.0","","reading","Max a un nouveau match sur Tinder !","Il tente d'ouvrir l'application pour voir de qui il s'agit, mais son téléphone reste figé sur la page d'accueil.","35","10031","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","85","702459","0.0-7.0-78.0","","","","","","","","","","","","",""
+"11279","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Léonard a envie de manger un bon plat ce soir.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Il va à son restaurant préféré.</div>
+          </div>
+        "," ","html-keyboard-response","86","713739","0.0-7.0-79.0","","reading","Léonard a envie de manger un bon plat ce soir.","Il va à son restaurant préféré.","36","11279","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","87","715739","0.0-7.0-80.0","","","","","","","","","","","","",""
+"7983","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Karen vient de marcher sur quelque chose de collant.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Elle regarde sous sa chaussure mais il n'y a rien.</div>
+          </div>
+        "," ","html-keyboard-response","88","723723","0.0-7.0-81.0","","reading","Karen vient de marcher sur quelque chose de collant.","Elle regarde sous sa chaussure mais il n'y a rien.","37","7983","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","89","725723","0.0-7.0-82.0","","","","","","","","","","","","",""
+"5183","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Comme tous les matins, Ana sort son chien.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Le soleil réchauffe sa peau.</div>
+          </div>
+        "," ","html-keyboard-response","90","730907","0.0-7.0-83.0","","reading","Comme tous les matins, Ana sort son chien.","Le soleil réchauffe sa peau.","38","5183","","","","","","",""
+"15328","
+        <div style=""
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          width: 90vw;
+          max-width: 90vw;
+          box-sizing: border-box;
+          padding: 40px;
+          word-wrap: break-word;
+          overflow-wrap: break-word;
+          white-space: normal;
+        "">
+          <div style=""
+            font-family: 'Courier New', monospace;
+            font-size: 40px;
+            line-height: 2.2;
+            letter-spacing: 2px;
+            text-align: center;
+            color: #111;
+            width: 100%;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: normal;
+          "">Avez-vous vu la phrase suivante ?<br><br><em>Il est 3 heures du matin et Selma marche vers chez elle. Soudain, elle entend une femme crier et une voiture arriver en trombe. Selma a à peine le temps de comprendre ce qu'il arrive que la voiture la percute. Elle décède sur le coup.</em></div>
+
+          <div style=""
+            display: flex;
+            flex-direction: row;
+            gap: 80px;
+            margin-top: 60px;
+            font-family: 'Courier New', monospace;
+            font-size: 28px;
+            color: #333;
+          "">
+            <div style=""text-align:center;"">
+              <div style=""font-size: 48px;"">↑</div>
+              <div>Oui</div>
+            </div>
+            <div style=""text-align:center;"">
+              <div style=""font-size: 48px;"">↓</div>
+              <div>Non</div>
+            </div>
+          </div>
+        </div>
+      ","arrowdown","html-keyboard-response","91","746232","0.0-7.0-84.0","","catch","Comme tous les matins, Ana sort son chien.","Le soleil réchauffe sa peau.","","","Il est 3 heures du matin et Selma marche vers chez elle. Soudain, elle entend une femme crier et une voiture arriver en trombe. Selma a à peine le temps de comprendre ce qu'il arrive que la voiture la percute. Elle décède sur le coup.","3","39","unseen","Non","Non","true"
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","92","748232","0.0-7.0-85.0","","","","","","","","","","","","",""
+"8719","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Jade se balade avec une amie.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Elles parlent de leur journée.</div>
+          </div>
+        "," ","html-keyboard-response","93","756952","0.0-7.0-86.0","","reading","Jade se balade avec une amie.","Elles parlent de leur journée.","39","8719","","","","","","",""
+"99792","
+          <div class=""instructions"">
+            <h2>Pause — Recalibration</h2>
+            <p>Nous allons recalibrer le suivi oculaire.</p>
+            <p>Appuyez sur <strong>ESPACE</strong> pour lancer la recalibration.</p>
+          </div>
+        "," ","html-keyboard-response","94","856741","0.0-7.0-87.0","","","","","","","","","","","","",""
+"","","","call-function","95","869160","0.0-7.0-88.0","","","","","","","","","","","","",""
+"8764","
+          <div class=""instructions"">
+            <h2>Recalibration terminée</h2>
+            <p>Appuyez sur <strong>ESPACE</strong> pour continuer la lecture.</p>
+          </div>
+        "," ","html-keyboard-response","96","877922","0.0-7.0-89.0","","","","","","","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","97","879923","0.0-7.0-90.0","","","","","","","","","","","","",""
+"9087","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Leo a commandé un écran sur Amazon.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Il reçoit son colis après 2 jours ouvrables comme prévu.</div>
+          </div>
+        "," ","html-keyboard-response","98","889010","0.0-7.0-91.0","","reading","Leo a commandé un écran sur Amazon.","Il reçoit son colis après 2 jours ouvrables comme prévu.","40","9087","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","99","891011","0.0-7.0-92.0","","","","","","","","","","","","",""
+"10591","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Laura aimerait adopter un chaton.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Elle va sur Internet pour trouver un refuge.</div>
+          </div>
+        "," ","html-keyboard-response","100","901602","0.0-7.0-93.0","","reading","Laura aimerait adopter un chaton.","Elle va sur Internet pour trouver un refuge.","41","10591","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","101","903602","0.0-7.0-94.0","","","","","","","","","","","","",""
+"13327","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Robbie se dirige vers le rencard que son meilleur ami lui a arrangé. Selon ce dernier, la fille qu'il va lui présenter est magnifique.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">En allant au rendez-vous, Robbie est très anxieux et il transpire beaucoup comme à son habitude.</div>
+          </div>
+        "," ","html-keyboard-response","102","916930","0.0-7.0-95.0","","reading","Robbie se dirige vers le rencard que son meilleur ami lui a arrangé. Selon ce dernier, la fille qu'il va lui présenter est magnifique.","En allant au rendez-vous, Robbie est très anxieux et il transpire beaucoup comme à son habitude.","42","13327","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","103","918931","0.0-7.0-96.0","","","","","","","","","","","","",""
+"5695","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Lena doit retirer de l'argent.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Elle se rend à la banque près de chez elle.</div>
+          </div>
+        "," ","html-keyboard-response","104","924626","0.0-7.0-97.0","","reading","Lena doit retirer de l'argent.","Elle se rend à la banque près de chez elle.","43","5695","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","105","926627","0.0-7.0-98.0","","","","","","","","","","","","",""
+"12799","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Une personne toque à la porte de Jim et dépose un colis inattendu.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Jim ouvre sa porte, curieux, mais en prenant le colis entre ses mains, il réalise qu'il est destiné à son voisin.</div>
+          </div>
+        "," ","html-keyboard-response","106","939424","0.0-7.0-99.0","","reading","Une personne toque à la porte de Jim et dépose un colis inattendu.","Jim ouvre sa porte, curieux, mais en prenant le colis entre ses mains, il réalise qu'il est destiné à son voisin.","44","12799","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","107","941424","0.0-7.0-100.0","","","","","","","","","","","","",""
+"13535","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Il est 3 heures du matin et Selma marche vers chez elle. Soudain, elle entend une femme crier et une voiture arriver en trombe.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Selma a à peine le temps de comprendre ce qu'il arrive que la voiture la percute. Elle décède sur le coup.</div>
+          </div>
+        "," ","html-keyboard-response","108","954960","0.0-7.0-101.0","","reading","Il est 3 heures du matin et Selma marche vers chez elle. Soudain, elle entend une femme crier et une voiture arriver en trombe.","Selma a à peine le temps de comprendre ce qu'il arrive que la voiture la percute. Elle décède sur le coup.","45","13535","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","109","956960","0.0-7.0-102.0","","","","","","","","","","","","",""
+"16399","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Kim veut partir en voyage mais elle ne sait pas encore où aller. Elle commence à regarder des destinations sur Google.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Elle voit qu'il y a des vols pas chers pour Venise ce week-end et elle en réserve un immédiatement.</div>
+          </div>
+        "," ","html-keyboard-response","110","973360","0.0-7.0-103.0","","reading","Kim veut partir en voyage mais elle ne sait pas encore où aller. Elle commence à regarder des destinations sur Google.","Elle voit qu'il y a des vols pas chers pour Venise ce week-end et elle en réserve un immédiatement.","46","16399","","","","","","",""
+"13024","
+        <div style=""
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          width: 90vw;
+          max-width: 90vw;
+          box-sizing: border-box;
+          padding: 40px;
+          word-wrap: break-word;
+          overflow-wrap: break-word;
+          white-space: normal;
+        "">
+          <div style=""
+            font-family: 'Courier New', monospace;
+            font-size: 40px;
+            line-height: 2.2;
+            letter-spacing: 2px;
+            text-align: center;
+            color: #111;
+            width: 100%;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: normal;
+          "">Avez-vous vu la phrase suivante ?<br><br><em>Robbie se dirige vers le rencard que son meilleur ami lui a arrangé. Selon ce dernier, la fille qu'il va lui présenter est magnifique. En allant au rendez-vous, Robbie est très anxieux et il transpire beaucoup comme à son habitude.</em></div>
+
+          <div style=""
+            display: flex;
+            flex-direction: row;
+            gap: 80px;
+            margin-top: 60px;
+            font-family: 'Courier New', monospace;
+            font-size: 28px;
+            color: #333;
+          "">
+            <div style=""text-align:center;"">
+              <div style=""font-size: 48px;"">↑</div>
+              <div>Oui</div>
+            </div>
+            <div style=""text-align:center;"">
+              <div style=""font-size: 48px;"">↓</div>
+              <div>Non</div>
+            </div>
+          </div>
+        </div>
+      ","arrowup","html-keyboard-response","111","986384","0.0-7.0-104.0","","catch","Kim veut partir en voyage mais elle ne sait pas encore où aller. Elle commence à regarder des destinations sur Google.","Elle voit qu'il y a des vols pas chers pour Venise ce week-end et elle en réserve un immédiatement.","","","Robbie se dirige vers le rencard que son meilleur ami lui a arrangé. Selon ce dernier, la fille qu'il va lui présenter est magnifique. En allant au rendez-vous, Robbie est très anxieux et il transpire beaucoup comme à son habitude.","4","47","seen","Oui","Oui","true"
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","112","988384","0.0-7.0-105.0","","","","","","","","","","","","",""
+"5983","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Le bus de Cara est en retard.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Elle continue à attendre.</div>
+          </div>
+        "," ","html-keyboard-response","113","994366","0.0-7.0-106.0","","reading","Le bus de Cara est en retard.","Elle continue à attendre.","47","5983","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","114","996366","0.0-7.0-107.0","","","","","","","","","","","","",""
+"30831","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Matéo est en train de courir pour attraper son bus lorsque son téléphone sonne. Une voix glaciale lui dit qu'un de ses proches a eu un accident.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Matéo s'arrête et le bus lui file sous le nez. Il demande qui est à l'appareil mais la ligne se coupe.</div>
+          </div>
+        "," ","html-keyboard-response","115","1027198","0.0-7.0-108.0","","reading","Matéo est en train de courir pour attraper son bus lorsque son téléphone sonne. Une voix glaciale lui dit qu'un de ses proches a eu un accident.","Matéo s'arrête et le bus lui file sous le nez. Il demande qui est à l'appareil mais la ligne se coupe.","48","30831","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","116","1029198","0.0-7.0-109.0","","","","","","","","","","","","",""
+"13359","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Karl est avec un ami lorsqu'ils croisent une fille avec qui ils ont passé la soirée il y a quelques semaines. Karl s'efforce de se rappeler son prénom mais n'y parvient pas.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Il continue de discuter avec elle comme si de rien n'était.</div>
+          </div>
+        "," ","html-keyboard-response","117","1042558","0.0-7.0-110.0","","reading","Karl est avec un ami lorsqu'ils croisent une fille avec qui ils ont passé la soirée il y a quelques semaines. Karl s'efforce de se rappeler son prénom mais n'y parvient pas.","Il continue de discuter avec elle comme si de rien n'était.","49","13359","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","118","1044558","0.0-7.0-111.0","","","","","","","","","","","","",""
+"9999","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Nick reçoit un message de sa maman qui lui dit qu'elle a préparé un bon repas pour lui.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Nick rentre avec hâte à la maison et découvre qu'elle lui a fait une pizza, son plat préféré.</div>
+          </div>
+        "," ","html-keyboard-response","119","1054556","0.0-7.0-112.0","","reading","Nick reçoit un message de sa maman qui lui dit qu'elle a préparé un bon repas pour lui.","Nick rentre avec hâte à la maison et découvre qu'elle lui a fait une pizza, son plat préféré.","50","9999","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","120","1056556","0.0-7.0-113.0","","","","","","","","","","","","",""
+"8335","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Paul doit rejoindre un ami pour prendre un café.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Il monte dans le bus pour se rendre au lieu de rendez-vous.</div>
+          </div>
+        "," ","html-keyboard-response","121","1064892","0.0-7.0-114.0","","reading","Paul doit rejoindre un ami pour prendre un café.","Il monte dans le bus pour se rendre au lieu de rendez-vous.","51","8335","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","122","1066892","0.0-7.0-115.0","","","","","","","","","","","","",""
+"8095","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">C'est la veille du Nouvel An et Mike entend des feux d'artifice toute la nuit.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Il met des bouchons d'oreilles pour dormir.</div>
+          </div>
+        "," ","html-keyboard-response","123","1074988","0.0-7.0-116.0","","reading","C'est la veille du Nouvel An et Mike entend des feux d'artifice toute la nuit.","Il met des bouchons d'oreilles pour dormir.","52","8095","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","124","1076988","0.0-7.0-117.0","","","","","","","","","","","","",""
+"15647","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Simon est en train de courir pour attraper son bus lorsque son téléphone sonne. Une voix glaciale lui dit qu'un de ses proches a eu un accident.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Simon s'arrête et le bus lui file sous le nez. Il demande qui est à l'appareil mais la ligne se coupe.</div>
+          </div>
+        "," ","html-keyboard-response","125","1092636","0.0-7.0-118.0","","reading","Simon est en train de courir pour attraper son bus lorsque son téléphone sonne. Une voix glaciale lui dit qu'un de ses proches a eu un accident.","Simon s'arrête et le bus lui file sous le nez. Il demande qui est à l'appareil mais la ligne se coupe.","53","15647","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","126","1094636","0.0-7.0-119.0","","","","","","","","","","","","",""
+"20095","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Emma est en train de courir dans un parc lorsqu'elle voit un homme au loin qui ressemble à son ami Marcus. Elle commence à courir dans sa direction pour vérifier que c'est bien lui.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Emma se rapproche de l'homme et crie: 'Marcus !'. L'homme se retourne en sursautant et la salue chaleureusement.</div>
+          </div>
+        "," ","html-keyboard-response","127","1114730","0.0-7.0-120.0","","reading","Emma est en train de courir dans un parc lorsqu'elle voit un homme au loin qui ressemble à son ami Marcus. Elle commence à courir dans sa direction pour vérifier que c'est bien lui.","Emma se rapproche de l'homme et crie: 'Marcus !'. L'homme se retourne en sursautant et la salue chaleureusement.","54","20095","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","128","1116730","0.0-7.0-121.0","","","","","","","","","","","","",""
+"15248","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Sara a travaillé assidûment pour la thèse qu'elle a rendue le mois passé. Elle espère avoir une bonne note.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">En arrivant en classe, son professeur la félicite immédiatement car sa thèse était excellente: Sara a obtenu un 90% !</div>
+          </div>
+        "," ","html-keyboard-response","129","1131978","0.0-7.0-122.0","","reading","Sara a travaillé assidûment pour la thèse qu'elle a rendue le mois passé. Elle espère avoir une bonne note.","En arrivant en classe, son professeur la félicite immédiatement car sa thèse était excellente: Sara a obtenu un 90% !","55","15248","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","130","1133978","0.0-7.0-123.0","","","","","","","","","","","","",""
+"17295","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Matéo est en retard pour aller au travail lorsque son téléphone sonne. Ça alors ! On l'appelle toujours au mauvais moment ! Il décroche, nerveux, et une voix froide lui dit qu'un de ses proches a été admis en réanimation à l'hôpital.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">La voix dit à Matéo que son frère vient d'avoir un grave accident de voiture.</div>
+          </div>
+        "," ","html-keyboard-response","131","1151274","0.0-7.0-124.0","","reading","Matéo est en retard pour aller au travail lorsque son téléphone sonne. Ça alors ! On l'appelle toujours au mauvais moment ! Il décroche, nerveux, et une voix froide lui dit qu'un de ses proches a été admis en réanimation à l'hôpital.","La voix dit à Matéo que son frère vient d'avoir un grave accident de voiture.","56","17295","","","","","","",""
+"8688","
+        <div style=""
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          width: 90vw;
+          max-width: 90vw;
+          box-sizing: border-box;
+          padding: 40px;
+          word-wrap: break-word;
+          overflow-wrap: break-word;
+          white-space: normal;
+        "">
+          <div style=""
+            font-family: 'Courier New', monospace;
+            font-size: 40px;
+            line-height: 2.2;
+            letter-spacing: 2px;
+            text-align: center;
+            color: #111;
+            width: 100%;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: normal;
+          "">Avez-vous vu la phrase suivante ?<br><br><em>Sara marche vers chez elle au milieu de la nuit. Des voitures passent le long de la rue.</em></div>
+
+          <div style=""
+            display: flex;
+            flex-direction: row;
+            gap: 80px;
+            margin-top: 60px;
+            font-family: 'Courier New', monospace;
+            font-size: 28px;
+            color: #333;
+          "">
+            <div style=""text-align:center;"">
+              <div style=""font-size: 48px;"">↑</div>
+              <div>Oui</div>
+            </div>
+            <div style=""text-align:center;"">
+              <div style=""font-size: 48px;"">↓</div>
+              <div>Non</div>
+            </div>
+          </div>
+        </div>
+      ","arrowdown","html-keyboard-response","132","1159962","0.0-7.0-125.0","","catch","Matéo est en retard pour aller au travail lorsque son téléphone sonne. Ça alors ! On l'appelle toujours au mauvais moment ! Il décroche, nerveux, et une voix froide lui dit qu'un de ses proches a été admis en réanimation à l'hôpital.","La voix dit à Matéo que son frère vient d'avoir un grave accident de voiture.","","","Sara marche vers chez elle au milieu de la nuit. Des voitures passent le long de la rue.","5","57","unseen","Non","Non","true"
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","133","1161962","0.0-7.0-126.0","","","","","","","","","","","","",""
+"11935","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Le train de Kim est retardé.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Elle entend qu'il sera retardé de quelques heures à cause d'un problème technique qui affecte les rails de train.</div>
+          </div>
+        "," ","html-keyboard-response","134","1173898","0.0-7.0-127.0","","reading","Le train de Kim est retardé.","Elle entend qu'il sera retardé de quelques heures à cause d'un problème technique qui affecte les rails de train.","57","11935","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","135","1175896","0.0-7.0-128.0","","","","","","","","","","","","",""
+"6751","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Serena entend que son examen d'algèbre a été annulé.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Elle espère que ce soit vrai car elle ne comprend rien en cours.</div>
+          </div>
+        "," ","html-keyboard-response","136","1182648","0.0-7.0-129.0","","reading","Serena entend que son examen d'algèbre a été annulé.","Elle espère que ce soit vrai car elle ne comprend rien en cours.","58","6751","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","137","1184648","0.0-7.0-130.0","","","","","","","","","","","","",""
+"7023","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Quelqu'un toque à la porte de Pierre et dépose un colis inattendu.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Pierre ouvre le colis et découvre un parfum offert par sa copine Sara.</div>
+          </div>
+        "," ","html-keyboard-response","138","1191672","0.0-7.0-131.0","","reading","Quelqu'un toque à la porte de Pierre et dépose un colis inattendu.","Pierre ouvre le colis et découvre un parfum offert par sa copine Sara.","59","7023","","","","","","",""
+"124128","
+          <div class=""instructions"">
+            <h2>Pause — Recalibration</h2>
+            <p>Nous allons recalibrer le suivi oculaire.</p>
+            <p>Appuyez sur <strong>ESPACE</strong> pour lancer la recalibration.</p>
+          </div>
+        "," ","html-keyboard-response","139","1315796","0.0-7.0-132.0","","","","","","","","","","","","",""
+"","","","call-function","140","1328324","0.0-7.0-133.0","","","","","","","","","","","","",""
+"3023","
+          <div class=""instructions"">
+            <h2>Recalibration terminée</h2>
+            <p>Appuyez sur <strong>ESPACE</strong> pour continuer la lecture.</p>
+          </div>
+        "," ","html-keyboard-response","141","1331348","0.0-7.0-134.0","","","","","","","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","142","1333348","0.0-7.0-135.0","","","","","","","","","","","","",""
+"11919","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Lucie marche dans la rue lorsqu'elle voit une personne au loin qui ressemble à son cousin Jérémy.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Lucie essaye d'attirer son attention en hurlant son prénom, en vain.</div>
+          </div>
+        "," ","html-keyboard-response","143","1345268","0.0-7.0-136.0","","reading","Lucie marche dans la rue lorsqu'elle voit une personne au loin qui ressemble à son cousin Jérémy.","Lucie essaye d'attirer son attention en hurlant son prénom, en vain.","60","11919","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","144","1347268","0.0-7.0-137.0","","","","","","","","","","","","",""
+"17775","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Connor attend son métro en espérant qu'il ne sera pas trop rempli.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Le métro qui arrive en station déborde de gens, Connor arrive à s'y glisser avec difficulté mais il a du mal à respirer.</div>
+          </div>
+        "," ","html-keyboard-response","145","1365042","0.0-7.0-138.0","","reading","Connor attend son métro en espérant qu'il ne sera pas trop rempli.","Le métro qui arrive en station déborde de gens, Connor arrive à s'y glisser avec difficulté mais il a du mal à respirer.","61","17775","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","146","1367042","0.0-7.0-139.0","","","","","","","","","","","","",""
+"8815","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Liam est à la station et il attend son train matinal.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Lorsque le train arrive, il monte dedans.</div>
+          </div>
+        "," ","html-keyboard-response","147","1375857","0.0-7.0-140.0","","reading","Liam est à la station et il attend son train matinal.","Lorsque le train arrive, il monte dedans.","62","8815","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","148","1377858","0.0-7.0-141.0","","","","","","","","","","","","",""
+"22672","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Andy est à son restaurant préféré et à son habitude il commande 'La Surprise du Chef' comme plat principal. Il s'agit d'une préparation dans laquelle le chef choisit les ingrédients qu'il souhaite travailler. Andy espère qu'il va aimer.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Un parfum incroyable se dégage du plat surprise. Andy se régale.</div>
+          </div>
+        "," ","html-keyboard-response","149","1400530","0.0-7.0-142.0","","reading","Andy est à son restaurant préféré et à son habitude il commande 'La Surprise du Chef' comme plat principal. Il s'agit d'une préparation dans laquelle le chef choisit les ingrédients qu'il souhaite travailler. Andy espère qu'il va aimer.","Un parfum incroyable se dégage du plat surprise. Andy se régale.","63","22672","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","150","1402530","0.0-7.0-143.0","","","","","","","","","","","","",""
+"14447","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Mia se balade avec un ami lorsque soudain il sort un cadeau de son sac.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Son ami lui demande si elle aime le papier cadeau.</div>
+          </div>
+        "," ","html-keyboard-response","151","1416977","0.0-7.0-144.0","","reading","Mia se balade avec un ami lorsque soudain il sort un cadeau de son sac.","Son ami lui demande si elle aime le papier cadeau.","64","14447","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","152","1418978","0.0-7.0-145.0","","","","","","","","","","","","",""
+"10911","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Maja marche avec un ami lorsqu'il sort un cadeau de son sac.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Elle déballe le cadeau et voit qu'il s'agit du magnifique pull qu'elle voulait depuis des mois.</div>
+          </div>
+        "," ","html-keyboard-response","153","1429887","0.0-7.0-146.0","","reading","Maja marche avec un ami lorsqu'il sort un cadeau de son sac.","Elle déballe le cadeau et voit qu'il s'agit du magnifique pull qu'elle voulait depuis des mois.","65","10911","","","","","","",""
+"9200","
+        <div style=""
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          width: 90vw;
+          max-width: 90vw;
+          box-sizing: border-box;
+          padding: 40px;
+          word-wrap: break-word;
+          overflow-wrap: break-word;
+          white-space: normal;
+        "">
+          <div style=""
+            font-family: 'Courier New', monospace;
+            font-size: 40px;
+            line-height: 2.2;
+            letter-spacing: 2px;
+            text-align: center;
+            color: #111;
+            width: 100%;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: normal;
+          "">Avez-vous vu la phrase suivante ?<br><br><em>Julie reçoit un appel de l'hôpital pour lui rappeler qu'elle a un rendez-vous avec son dentiste. Julie remercie le réceptionniste pour ce rappel.</em></div>
+
+          <div style=""
+            display: flex;
+            flex-direction: row;
+            gap: 80px;
+            margin-top: 60px;
+            font-family: 'Courier New', monospace;
+            font-size: 28px;
+            color: #333;
+          "">
+            <div style=""text-align:center;"">
+              <div style=""font-size: 48px;"">↑</div>
+              <div>Oui</div>
+            </div>
+            <div style=""text-align:center;"">
+              <div style=""font-size: 48px;"">↓</div>
+              <div>Non</div>
+            </div>
+          </div>
+        </div>
+      ","arrowdown","html-keyboard-response","154","1439087","0.0-7.0-147.0","","catch","Maja marche avec un ami lorsqu'il sort un cadeau de son sac.","Elle déballe le cadeau et voit qu'il s'agit du magnifique pull qu'elle voulait depuis des mois.","","","Julie reçoit un appel de l'hôpital pour lui rappeler qu'elle a un rendez-vous avec son dentiste. Julie remercie le réceptionniste pour ce rappel.","6","66","unseen","Non","Non","true"
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","155","1441088","0.0-7.0-148.0","","","","","","","","","","","","",""
+"8751","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Mona dort paisiblement dans son lit.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Elle rêve que son chien court dans le jardin.</div>
+          </div>
+        "," ","html-keyboard-response","156","1449839","0.0-7.0-149.0","","reading","Mona dort paisiblement dans son lit.","Elle rêve que son chien court dans le jardin.","66","8751","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","157","1451840","0.0-7.0-150.0","","","","","","","","","","","","",""
+"24607","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Chloé est sur le point de s'endormir lorsque l'avion sur lequel elle voyage commence à faire un bruit sourd depuis le moteur gauche.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Après quelques minutes, le pilote dit aux passagers qu'une turbine dans le moteur est défectueuse mais que cela ne va pas influencer leur trajet. Il ajoute qu'il ne faut pas paniquer.</div>
+          </div>
+        "," ","html-keyboard-response","158","1476447","0.0-7.0-151.0","","reading","Chloé est sur le point de s'endormir lorsque l'avion sur lequel elle voyage commence à faire un bruit sourd depuis le moteur gauche.","Après quelques minutes, le pilote dit aux passagers qu'une turbine dans le moteur est défectueuse mais que cela ne va pas influencer leur trajet. Il ajoute qu'il ne faut pas paniquer.","67","24607","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","159","1478448","0.0-7.0-152.0","","","","","","","","","","","","",""
+"7983","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Ivan adore faire du voilier.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Il part souvent en navigation pendant l'été.</div>
+          </div>
+        "," ","html-keyboard-response","160","1486431","0.0-7.0-153.0","","reading","Ivan adore faire du voilier.","Il part souvent en navigation pendant l'été.","68","7983","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","161","1488432","0.0-7.0-154.0","","","","","","","","","","","","",""
+"20559","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Arthur fait la queue à la banque pour retirer de l'argent quand un homme cagoulé et armé entre dans le bâtiment.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Arthur lâche un cri strident et se fait immédiatement tirer dessus. Il meurt avant d'arriver aux urgences.</div>
+          </div>
+        "," ","html-keyboard-response","162","1508989","0.0-7.0-155.0","","reading","Arthur fait la queue à la banque pour retirer de l'argent quand un homme cagoulé et armé entre dans le bâtiment.","Arthur lâche un cri strident et se fait immédiatement tirer dessus. Il meurt avant d'arriver aux urgences.","69","20559","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","163","1510990","0.0-7.0-156.0","","","","","","","","","","","","",""
+"5167","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Matt a une copine.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Il lui fait beaucoup de cadeaux.</div>
+          </div>
+        "," ","html-keyboard-response","164","1516157","0.0-7.0-157.0","","reading","Matt a une copine.","Il lui fait beaucoup de cadeaux.","70","5167","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","165","1518158","0.0-7.0-158.0","","","","","","","","","","","","",""
+"15295","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Comme chaque matin, Sara se balade dans son quartier lorsqu'elle entend quelqu'un chanter bruyamment.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Elle regarde derrière elle pour comprendre d'où vient cette voix, mais ne voit que des enfants aux alentours.</div>
+          </div>
+        "," ","html-keyboard-response","166","1533453","0.0-7.0-159.0","","reading","Comme chaque matin, Sara se balade dans son quartier lorsqu'elle entend quelqu'un chanter bruyamment.","Elle regarde derrière elle pour comprendre d'où vient cette voix, mais ne voit que des enfants aux alentours.","71","15295","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","167","1535454","0.0-7.0-160.0","","","","","","","","","","","","",""
+"8288","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Elena fait du tourisme lorsqu'elle sent quelque chose de chaud tomber sur son épaule.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Elle regarde son épaule mais il n'y a rien dessus.</div>
+          </div>
+        "," ","html-keyboard-response","168","1543742","0.0-7.0-161.0","","reading","Elena fait du tourisme lorsqu'elle sent quelque chose de chaud tomber sur son épaule.","Elle regarde son épaule mais il n'y a rien dessus.","72","8288","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","169","1545742","0.0-7.0-162.0","","","","","","","","","","","","",""
+"9775","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Mady fait la fête au centre-ville.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Elle voit beaucoup de personnes qui consomment de l'alcool.</div>
+          </div>
+        "," ","html-keyboard-response","170","1555515","0.0-7.0-163.0","","reading","Mady fait la fête au centre-ville.","Elle voit beaucoup de personnes qui consomment de l'alcool.","73","9775","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","171","1557516","0.0-7.0-164.0","","","","","","","","","","","","",""
+"7727","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Theo prend l'avion pour partir en vacances.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Il a préparé une grande valise avec tous ses habits préférés.</div>
+          </div>
+        "," ","html-keyboard-response","172","1565243","0.0-7.0-165.0","","reading","Theo prend l'avion pour partir en vacances.","Il a préparé une grande valise avec tous ses habits préférés.","74","7727","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","173","1567244","0.0-7.0-166.0","","","","","","","","","","","","",""
+"5615","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Emma se balade dans la rue.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Elle porte des chaussures bleues.</div>
+          </div>
+        "," ","html-keyboard-response","174","1572859","0.0-7.0-167.0","","reading","Emma se balade dans la rue.","Elle porte des chaussures bleues.","75","5615","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","175","1574860","0.0-7.0-168.0","","","","","","","","","","","","",""
+"8111","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Julie reçoit un appel de l'hôpital pour lui rappeler qu'elle a un rendez-vous avec son dentiste.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Julie remercie le réceptionniste pour ce rappel.</div>
+          </div>
+        "," ","html-keyboard-response","176","1582971","0.0-7.0-169.0","","reading","Julie reçoit un appel de l'hôpital pour lui rappeler qu'elle a un rendez-vous avec son dentiste.","Julie remercie le réceptionniste pour ce rappel.","76","8111","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","177","1584972","0.0-7.0-170.0","","","","","","","","","","","","",""
+"17808","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Jim habite seul et il rentre tous les jours du travail à 19h. Mais vendredi dernier, en passant le seuil de sa porte, un bruit inquiétant venant de l'étage l'a surpris.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Après avoir monté les escaliers en courant, il découvre qu'un oiseau s'est introduit dans sa chambre par la fenêtre et a détruit son vase préféré.</div>
+          </div>
+        "," ","html-keyboard-response","178","1602779","0.0-7.0-171.0","","reading","Jim habite seul et il rentre tous les jours du travail à 19h. Mais vendredi dernier, en passant le seuil de sa porte, un bruit inquiétant venant de l'étage l'a surpris.","Après avoir monté les escaliers en courant, il découvre qu'un oiseau s'est introduit dans sa chambre par la fenêtre et a détruit son vase préféré.","77","17808","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","179","1604780","0.0-7.0-172.0","","","","","","","","","","","","",""
+"8031","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">La maman d'Ethan lui envoie un message en disant qu'elle va lui préparer un bon repas.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Curieux, Ethan essaye de l'appeler pour en savoir plus mais son téléphone s'éteint.</div>
+          </div>
+        "," ","html-keyboard-response","180","1612811","0.0-7.0-173.0","","reading","La maman d'Ethan lui envoie un message en disant qu'elle va lui préparer un bon repas.","Curieux, Ethan essaye de l'appeler pour en savoir plus mais son téléphone s'éteint.","78","8031","","","","","","",""
+"11680","
+        <div style=""
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          width: 90vw;
+          max-width: 90vw;
+          box-sizing: border-box;
+          padding: 40px;
+          word-wrap: break-word;
+          overflow-wrap: break-word;
+          white-space: normal;
+        "">
+          <div style=""
+            font-family: 'Courier New', monospace;
+            font-size: 40px;
+            line-height: 2.2;
+            letter-spacing: 2px;
+            text-align: center;
+            color: #111;
+            width: 100%;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: normal;
+          "">Avez-vous vu la phrase suivante ?<br><br><em>Mira rentre chez elle en pleine nuit, vers 3 heures du matin, lorsqu'elle entend une moto arriver rapidement dans son dos et des cris stridents. Elle se retourne pour regarder ce qu'il se passe.</em></div>
+
+          <div style=""
+            display: flex;
+            flex-direction: row;
+            gap: 80px;
+            margin-top: 60px;
+            font-family: 'Courier New', monospace;
+            font-size: 28px;
+            color: #333;
+          "">
+            <div style=""text-align:center;"">
+              <div style=""font-size: 48px;"">↑</div>
+              <div>Oui</div>
+            </div>
+            <div style=""text-align:center;"">
+              <div style=""font-size: 48px;"">↓</div>
+              <div>Non</div>
+            </div>
+          </div>
+        </div>
+      ","arrowdown","html-keyboard-response","181","1624489","0.0-7.0-174.0","","catch","La maman d'Ethan lui envoie un message en disant qu'elle va lui préparer un bon repas.","Curieux, Ethan essaye de l'appeler pour en savoir plus mais son téléphone s'éteint.","","","Mira rentre chez elle en pleine nuit, vers 3 heures du matin, lorsqu'elle entend une moto arriver rapidement dans son dos et des cris stridents. Elle se retourne pour regarder ce qu'il se passe.","7","79","unseen","Non","Non","true"
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","182","1626490","0.0-7.0-175.0","","","","","","","","","","","","",""
+"8815","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Kevin est un fervent supporter de l'équipe nationale de football.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Il regarde tous les matchs et connaît les particularités de chaque joueur.</div>
+          </div>
+        "," ","html-keyboard-response","183","1635305","0.0-7.0-176.0","","reading","Kevin est un fervent supporter de l'équipe nationale de football.","Il regarde tous les matchs et connaît les particularités de chaque joueur.","79","8815","","","","","","",""
+"11376","
+          <div class=""instructions"">
+            <h2>Pause — Recalibration</h2>
+            <p>Nous allons recalibrer le suivi oculaire.</p>
+            <p>Appuyez sur <strong>ESPACE</strong> pour lancer la recalibration.</p>
+          </div>
+        "," ","html-keyboard-response","184","1646681","0.0-7.0-177.0","","","","","","","","","","","","",""
+"","","","call-function","185","1701136","0.0-7.0-178.0","","","","","","","","","","","","",""
+"2054","
+          <div class=""instructions"">
+            <h2>Recalibration terminée</h2>
+            <p>Appuyez sur <strong>ESPACE</strong> pour continuer la lecture.</p>
+          </div>
+        "," ","html-keyboard-response","186","1703191","0.0-7.0-179.0","","","","","","","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","187","1705192","0.0-7.0-180.0","","","","","","","","","","","","",""
+"6895","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Sara marche vers chez elle au milieu de la nuit.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Des voitures passent le long de la rue.</div>
+          </div>
+        "," ","html-keyboard-response","188","1712087","0.0-7.0-181.0","","reading","Sara marche vers chez elle au milieu de la nuit.","Des voitures passent le long de la rue.","80","6895","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","189","1714088","0.0-7.0-182.0","","","","","","","","","","","","",""
+"13952","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Soline a travaillé d'arrache-pied sur son devoir le mois passé. Elle se rend en classe et espère recevoir une très bonne note.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Son professeur lui dit qu'il n'a pas encore fini de corriger les devoirs.</div>
+          </div>
+        "," ","html-keyboard-response","190","1728039","0.0-7.0-183.0","","reading","Soline a travaillé d'arrache-pied sur son devoir le mois passé. Elle se rend en classe et espère recevoir une très bonne note.","Son professeur lui dit qu'il n'a pas encore fini de corriger les devoirs.","81","13952","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","191","1730039","0.0-7.0-184.0","","","","","","","","","","","","",""
+"13488","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Nelly aimerait adopter un chaton et elle espère en trouver un au refuge de la ville.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Lorsqu'elle arrive au refuge, Nelly identifie immédiatement le chaton de ses rêves: un tout noir avec des petites oreilles.</div>
+          </div>
+        "," ","html-keyboard-response","192","1743525","0.0-7.0-185.0","","reading","Nelly aimerait adopter un chaton et elle espère en trouver un au refuge de la ville.","Lorsqu'elle arrive au refuge, Nelly identifie immédiatement le chaton de ses rêves: un tout noir avec des petites oreilles.","82","13488","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","193","1745526","0.0-7.0-186.0","","","","","","","","","","","","",""
+"10863","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Mara est dans ses pensées lorsque l'avion dans lequel elle voyage perd de l'altitude violemment. Tout le monde commence à hurler.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">L'hôtesse de l'air la plus proche s'évanouit.</div>
+          </div>
+        "," ","html-keyboard-response","194","1756389","0.0-7.0-187.0","","reading","Mara est dans ses pensées lorsque l'avion dans lequel elle voyage perd de l'altitude violemment. Tout le monde commence à hurler.","L'hôtesse de l'air la plus proche s'évanouit.","83","10863","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","195","1758389","0.0-7.0-188.0","","","","","","","","","","","","",""
+"13855","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Ava a acheté un nouveau sac à main de luxe et elle a hâte de le montrer à ses copines.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Ava est très satisfaite de son achat et elle s'entraîne à défiler avec dans son salon comme le font les stars.</div>
+          </div>
+        "," ","html-keyboard-response","196","1772245","0.0-7.0-189.0","","reading","Ava a acheté un nouveau sac à main de luxe et elle a hâte de le montrer à ses copines.","Ava est très satisfaite de son achat et elle s'entraîne à défiler avec dans son salon comme le font les stars.","84","13855","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","197","1774246","0.0-7.0-190.0","","","","","","","","","","","","",""
+"33663","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Megan est en train de bronzer sur son bateau lorsqu'elle entrevoit une tempête se former à quelques nœuds.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Il commence à pleuvoir et elle essaye de s'abriter. Des vagues de plusieurs mètres s'abattent sur le mât du bateau, Megan perd l'équilibre et tombe dans l'eau. Elle se bat contre les vagues pendant plusieurs minutes mais, exténuée, elle se noie.</div>
+          </div>
+        "," ","html-keyboard-response","198","1807907","0.0-7.0-191.0","","reading","Megan est en train de bronzer sur son bateau lorsqu'elle entrevoit une tempête se former à quelques nœuds.","Il commence à pleuvoir et elle essaye de s'abriter. Des vagues de plusieurs mètres s'abattent sur le mât du bateau, Megan perd l'équilibre et tombe dans l'eau. Elle se bat contre les vagues pendant plusieurs minutes mais, exténuée, elle se noie.","85","33663","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","199","1809908","0.0-7.0-192.0","","","","","","","","","","","","",""
+"11151","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Alexandra aimerait adopter un chat et elle espère en trouver un au refuge.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Mais elle est inquiète car son chien a mauvais caractère et il pourrait mal réagir à l'arrivée d'un chaton à la maison.</div>
+          </div>
+        "," ","html-keyboard-response","200","1821059","0.0-7.0-193.0","","reading","Alexandra aimerait adopter un chat et elle espère en trouver un au refuge.","Mais elle est inquiète car son chien a mauvais caractère et il pourrait mal réagir à l'arrivée d'un chaton à la maison.","86","11151","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","201","1823060","0.0-7.0-194.0","","","","","","","","","","","","",""
+"11103","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Mira rentre chez elle en pleine nuit, vers 3 heures du matin, lorsqu'elle entend une moto arriver rapidement dans son dos et des cris stridents.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Elle se retourne pour regarder ce qu'il se passe.</div>
+          </div>
+        "," ","html-keyboard-response","202","1834163","0.0-7.0-195.0","","reading","Mira rentre chez elle en pleine nuit, vers 3 heures du matin, lorsqu'elle entend une moto arriver rapidement dans son dos et des cris stridents.","Elle se retourne pour regarder ce qu'il se passe.","87","11103","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","203","1836164","0.0-7.0-196.0","","","","","","","","","","","","",""
+"10143","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Lucille ne trouve pas son portable.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Elle regarde partout dans la maison mais il n'y a pas de trace de son téléphone.</div>
+          </div>
+        "," ","html-keyboard-response","204","1846307","0.0-7.0-197.0","","reading","Lucille ne trouve pas son portable.","Elle regarde partout dans la maison mais il n'y a pas de trace de son téléphone.","88","10143","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","205","1848308","0.0-7.0-198.0","","","","","","","","","","","","",""
+"14575","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Lorena est en retard pour son rendez-vous. Elle s'apprête à sortir mais elle ne trouve pas son téléphone.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Elle se souvient soudain qu'elle l'a laissé dans les cabines à la gym ce matin.</div>
+          </div>
+        "," ","html-keyboard-response","206","1862883","0.0-7.0-199.0","","reading","Lorena est en retard pour son rendez-vous. Elle s'apprête à sortir mais elle ne trouve pas son téléphone.","Elle se souvient soudain qu'elle l'a laissé dans les cabines à la gym ce matin.","89","14575","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","207","1864882","0.0-7.0-200.0","","","","","","","","","","","","",""
+"16143","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Bob regarde une finale de Coupe du monde, son équipe préférée a des chances de gagner !</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Bob ne quitte pas l'écran des yeux, jusqu'au moment où son équipe devient enfin championne du monde !</div>
+          </div>
+        "," ","html-keyboard-response","208","1881025","0.0-7.0-201.0","","reading","Bob regarde une finale de Coupe du monde, son équipe préférée a des chances de gagner !","Bob ne quitte pas l'écran des yeux, jusqu'au moment où son équipe devient enfin championne du monde !","90","16143","","","","","","",""
+"9371","
+        <div style=""
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          width: 90vw;
+          max-width: 90vw;
+          box-sizing: border-box;
+          padding: 40px;
+          word-wrap: break-word;
+          overflow-wrap: break-word;
+          white-space: normal;
+        "">
+          <div style=""
+            font-family: 'Courier New', monospace;
+            font-size: 40px;
+            line-height: 2.2;
+            letter-spacing: 2px;
+            text-align: center;
+            color: #111;
+            width: 100%;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: normal;
+          "">Avez-vous vu la phrase suivante ?<br><br><em>En sortant de l'école, Justine réalise qu'elle a oublié son téléphone en classe. Elle décide de retourner à l'école pour le récupérer.</em></div>
+
+          <div style=""
+            display: flex;
+            flex-direction: row;
+            gap: 80px;
+            margin-top: 60px;
+            font-family: 'Courier New', monospace;
+            font-size: 28px;
+            color: #333;
+          "">
+            <div style=""text-align:center;"">
+              <div style=""font-size: 48px;"">↑</div>
+              <div>Oui</div>
+            </div>
+            <div style=""text-align:center;"">
+              <div style=""font-size: 48px;"">↓</div>
+              <div>Non</div>
+            </div>
+          </div>
+        </div>
+      ","arrowdown","html-keyboard-response","209","1890396","0.0-7.0-202.0","","catch","Bob regarde une finale de Coupe du monde, son équipe préférée a des chances de gagner !","Bob ne quitte pas l'écran des yeux, jusqu'au moment où son équipe devient enfin championne du monde !","","","En sortant de l'école, Justine réalise qu'elle a oublié son téléphone en classe. Elle décide de retourner à l'école pour le récupérer.","8","91","unseen","Non","Non","true"
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","210","1892397","0.0-7.0-203.0","","","","","","","","","","","","",""
+"15028","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Lorenzo est à son restaurant favori, il adore y aller car son ami Aaron est le chef. Lorenzo a hâte de goûter ce qu'Aaron va lui préparer vu que chaque fois qu'il mange chez lui, il découvre de nouvelles saveurs.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">L'attente est plus longue que d'habitude, Lorenzo a très faim.</div>
+          </div>
+        "," ","html-keyboard-response","211","1907425","0.0-7.0-204.0","","reading","Lorenzo est à son restaurant favori, il adore y aller car son ami Aaron est le chef. Lorenzo a hâte de goûter ce qu'Aaron va lui préparer vu que chaque fois qu'il mange chez lui, il découvre de nouvelles saveurs.","L'attente est plus longue que d'habitude, Lorenzo a très faim.","91","15028","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","212","1909426","0.0-7.0-205.0","","","","","","","","","","","","",""
+"6863","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Mara a bientôt un examen de la plus haute importance.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Elle passe toutes ses journées à la bibliothèque.</div>
+          </div>
+        "," ","html-keyboard-response","213","1916289","0.0-7.0-206.0","","reading","Mara a bientôt un examen de la plus haute importance.","Elle passe toutes ses journées à la bibliothèque.","92","6863","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","214","1918289","0.0-7.0-207.0","","","","","","","","","","","","",""
+"6431","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Erin voyage en avion.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Elle a bouclé sa ceinture.</div>
+          </div>
+        "," ","html-keyboard-response","215","1924721","0.0-7.0-208.0","","reading","Erin voyage en avion.","Elle a bouclé sa ceinture.","93","6431","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","216","1926720","0.0-7.0-209.0","","","","","","","","","","","","",""
+"9599","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">En sortant de l'école, Justine réalise qu'elle a oublié son téléphone en classe.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Elle décide de retourner à l'école pour le récupérer.</div>
+          </div>
+        "," ","html-keyboard-response","217","1936319","0.0-7.0-210.0","","reading","En sortant de l'école, Justine réalise qu'elle a oublié son téléphone en classe.","Elle décide de retourner à l'école pour le récupérer.","94","9599","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","218","1938319","0.0-7.0-211.0","","","","","","","","","","","","",""
+"17311","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Sam se fait réveiller par l'aboiement de son chien en pleine nuit. Il se dit que c'est étrange étant donné que son chien est d'habitude très calme.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Il se lève pour aller voir si son chien va bien. Une fois en bas des escaliers, il se frotte les yeux pour être sûr de bien voir ce qu'il se passe : son chien a une souris dans la gueule.</div>
+          </div>
+        "," ","html-keyboard-response","219","1955631","0.0-7.0-212.0","","reading","Sam se fait réveiller par l'aboiement de son chien en pleine nuit. Il se dit que c'est étrange étant donné que son chien est d'habitude très calme.","Il se lève pour aller voir si son chien va bien. Une fois en bas des escaliers, il se frotte les yeux pour être sûr de bien voir ce qu'il se passe : son chien a une souris dans la gueule.","95","17311","","","","","","",""
+"null","<div style=""font-size:80px;text-align:center;"">+</div>","null","html-keyboard-response","220","1957631","0.0-7.0-213.0","","","","","","","","","","","","",""
+"8768","
+          <div class=""sentence-container"">
+            <div class=""sentence-text"">Justine bronze en pleine mer lorsqu'elle voit une tornade se former au loin.</div>
+            <hr class=""sentence-divider"">
+            <div class=""sentence-text"">Un frisson parcourt sa colonne vertébrale.</div>
+          </div>
+        "," ","html-keyboard-response","221","1966399","0.0-7.0-214.0","","reading","Justine bronze en pleine mer lorsqu'elle voit une tornade se former au loin.","Un frisson parcourt sa colonne vertébrale.","96","8768","","","","","","",""

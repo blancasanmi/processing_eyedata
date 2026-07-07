@@ -1,0 +1,332 @@
+presentation_index,part_nr,line_idx,text,top,bottom,left,right
+0,1,0,Eva planifie un city-trip à San Francisco.,412,500,414,1506
+0,2,0,Elle voudrait trouver un vol pas cher.,580,668,466,1454
+1,1,0,Jeanne fait des activités touristiques.,412,500,453,1467
+1,2,0,Elle prend beaucoup de selfies.,580,668,557,1363
+2,1,0,Elena est de sortie en ville lorsque sa mère l'appelle en panique,236,324,115,1805
+2,1,1,"pour lui demander si elle est bien en sécurité. Elle poursuit,",324,412,154,1766
+2,1,2,"confuse, en criant que quelque chose d'horrible vient d'arriver au",412,500,102,1818
+2,1,3,centre-ville.,500,588,791,1129
+2,2,0,La mère d'Elena lui dit qu'il y a eu une attaque à la bombe et,668,756,154,1766
+2,2,1,qu'elle doit rentrer à la maison le plus vite possible.,756,844,245,1675
+3,1,0,Erik vient d'acheter des sneakers super rares et il a hâte de voir,324,412,102,1818
+3,1,1,la tête de ses amis quand il leur dira ce soir.,412,500,349,1571
+3,2,0,Les amis d'Erik adorent sa nouvelle paire et le complimentent sur,580,668,115,1805
+3,2,1,son goût.,668,756,843,1077
+4,1,0,Il est 4 heures du matin et John est sur le point de s'endormir,368,456,141,1779
+4,1,1,lorsqu'il entend des coups de feu.,456,544,518,1402
+4,2,0,Il sursaute de son lit et regarde par sa fenêtre.,624,712,323,1597
+5,1,0,"La valise de Marco, contenant tous ses habits favoris, a été",280,368,180,1740
+5,1,1,perdue lors de son voyage en avion.,368,456,505,1415
+5,2,0,Marco reçoit un appel de la compagnie aérienne lui disant qu'ils,536,624,128,1792
+5,2,1,sont dans l'incapacité de trouver sa valise et qu'il sera,624,712,219,1701
+5,2,2,remboursé à la hauteur de 300 euros pour les dommages occasionnés.,712,800,102,1818
+6,1,0,"Magnus doit rejoindre son ami pour prendre un café, il décide de",368,456,128,1792
+6,1,1,regarder l'heure sur son portable.,456,544,518,1402
+6,2,0,Magnus sort son téléphone mais sa batterie est à plat.,624,712,258,1662
+7,1,0,Lisa a travaillé assidûment pour sa thèse de master.,412,500,284,1636
+7,2,0,Elle a eu une très bonne note: 85% !,580,668,492,1428
+8,1,0,Bruno rentre chez lui.,412,500,674,1246
+8,2,0,Il prend son bus.,580,668,739,1181
+9,1,0,Mike est dans un supermarché lorsqu'un homme cagoulé et armé crie:,368,456,102,1818
+9,1,1,"'Tout le monde au sol, ceci est un hold-up !'",456,544,375,1545
+9,2,0,Les jambes de Mike commencent à trembler.,624,712,427,1493
+10,1,0,Il est 4 heures du matin et Mike s'apprête à aller dormir lorsque,236,324,115,1805
+10,1,1,soudain il entend un homme crier 'Adieu monde cruel' suivi d'un,324,412,141,1779
+10,1,2,bruit sourd.,412,500,804,1116
+10,2,0,"Le souffle coupé, il se lève pour se rapprocher de sa fenêtre. Il",580,668,115,1805
+10,2,1,a à peine le temps de se frotter les paupières qu'il voit son,668,756,167,1753
+10,2,2,"voisin étendu à terre, inerte.",756,844,570,1350
+11,1,0,Bertrand a joué à la loterie en utilisant ses numéros favoris pour,324,412,102,1818
+11,1,1,tenter de gagner le jackpot de 4 000 000 €.,412,500,401,1519
+11,2,0,"Il essaie de regarder le tirage de la loterie à la télé, mais il",580,668,128,1792
+11,2,1,n'y a pas de signal.,668,756,700,1220
+12,1,0,Emmanuel est supposé rejoindre son ami pour prendre un verre d'ici,280,368,102,1818
+12,1,1,"peu, donc il décide de vérifier l'heure qu'il est sur son",368,456,219,1701
+12,1,2,téléphone.,456,544,830,1090
+12,2,0,Il est 16h30. Vite ! Il ne lui reste plus que 10 minutes pour le,624,712,128,1792
+12,2,1,rejoindre.,712,800,830,1090
+13,1,0,Sam rentre à la maison.,412,500,661,1259
+13,2,0,Il enlève sa veste.,580,668,713,1207
+14,1,0,"La valise de Simon, contenant tous ses livres favoris, a été",324,412,180,1740
+14,1,1,perdue par la compagnie aérienne lors de son dernier vol.,412,500,219,1701
+14,2,0,Simon commence à faire la queue pour réclamer sa valise aux objets,580,668,102,1818
+14,2,1,trouvés.,668,756,856,1064
+15,1,0,Tyler adore les sneakers.,412,500,635,1285
+15,2,0,Il décide d'en acheter une nouvelle paire.,580,668,414,1506
+16,1,0,"Clara est au centre-ville lorsque son père l'appelle, inquiet, en",324,412,115,1805
+16,1,1,demandant si elle va bien car une fusillade a éclaté à la gare.,412,500,141,1779
+16,2,0,Clara essaie de le calmer et lui dit de la lâcher un peu. Il,580,668,180,1740
+16,2,1,exagère toujours.,668,756,739,1181
+17,1,0,Alexandre joue à la loterie chaque semaine.,412,500,401,1519
+17,2,0,Il achète toujours ses tickets chez le même vendeur.,580,668,284,1636
+18,1,0,La maman de Kevin lui envoie un message en lui demandant ce qu'il,368,456,115,1805
+18,1,1,voudrait manger pour le dîner.,456,544,570,1350
+18,2,0,Il lui répond qu'il aimerait des lasagnes.,624,712,414,1506
+19,1,0,"Tom regarde un match de foot avec son équipe préférée, ils",324,412,206,1714
+19,1,1,pourraient gagner la Champions League !,412,500,453,1467
+19,2,0,"Les deux équipes jouent aussi bien l'une que l'autre, le match est",580,668,102,1818
+19,2,1,très serré.,668,756,817,1103
+20,1,0,Lena fait son jogging dans un parc.,412,500,505,1415
+20,2,0,Elle croise beaucoup de gens qui font des pique-niques.,580,668,245,1675
+21,1,0,Mario est avec un ami lorsqu'ils croisent une fille avec qui ils,324,412,128,1792
+21,1,1,"sont sortis en soirée, mais il ne se rappelle plus son prénom.",412,500,154,1766
+21,2,0,L'ami de Mario lui glisse discrètement à l'oreille qu'elle,580,668,206,1714
+21,2,1,s'appelle Diana.,668,756,752,1168
+22,1,0,Sam est sur Tinder.,368,456,713,1207
+22,2,0,Il croise des profils différents et décide s'il souhaite les,536,624,180,1740
+22,2,1,'matcher'.,624,712,830,1090
+23,1,0,"Comme chaque matin, Eva se promène lorsqu'elle entend une personne",324,412,102,1818
+23,1,1,crier des mots dans une langue étrangère derrière elle.,412,500,245,1675
+23,2,0,Elle se retourne et voit qu'il s'agit d'un homme bourré qui se met,580,668,102,1818
+23,2,1,à vomir sur le trottoir.,668,756,648,1272
+24,1,0,Simon est avec un ami lorsqu'il croise une fille avec qui ils ont,368,456,115,1805
+24,1,1,fait la fête toute la nuit il y a quelques semaines.,456,544,284,1636
+24,2,0,Ils discutent de tout et de rien.,624,712,531,1389
+25,1,0,Nathan a joué à la loterie avec les mêmes numéros qu'il utilise à,280,368,115,1805
+25,1,1,"chaque fois. Cette semaine, il pourrait gagner 3 000 000 d'euros.",368,456,115,1805
+25,2,0,Nathan regarde ses numéros par rapport aux numéros gagnants... et,536,624,115,1805
+25,2,1,"c'est le jackpot !!! Il a tous les numéros gagnants, il est",624,712,193,1727
+25,2,2,maintenant millionnaire !,712,800,635,1285
+26,1,0,Adrien est réveillé par son chien qui aboie en pleine nuit. Il est,280,368,102,1818
+26,1,1,surpris car son chien n'aboie jamais.,368,456,479,1441
+26,2,0,Il se dit qu'il devrait descendre vérifier ce qu'il se passe mais,536,624,115,1805
+26,2,1,"il est trop fatigué. Il retourne donc dormir, tant pis si ce sont",624,712,115,1805
+26,2,2,des voleurs.,712,800,804,1116
+27,1,0,"Irene aimerait voyager, mais ne sachant pas où aller, elle décide",324,412,115,1805
+27,1,1,de demander conseil à une agence de voyages.,412,500,388,1532
+27,2,0,L'agent lui dit qu'il y a des promotions intéressantes pour,580,668,193,1727
+27,2,1,"Malaga, Barcelone et Rome.",668,756,622,1298
+28,1,0,Olivia fait un tour touristique lorsque quelque chose de mouillé,324,412,128,1792
+28,1,1,tombe sur sa tête.,412,500,726,1194
+28,2,0,Elle touche ses cheveux et comprend qu'un pigeon lui a déféqué,580,668,154,1766
+28,2,1,dessus.,668,756,869,1051
+29,1,0,Mina vient de marcher sur quelque chose de collant.,368,456,297,1623
+29,2,0,Elle regarde sous sa chaussure et voit qu'un chewing-gum est collé,536,624,102,1818
+29,2,1,à sa semelle.,624,712,791,1129
+30,1,0,Quelqu'un a dit à Cynthia que l'examen de physique quantique,324,412,180,1740
+30,1,1,qu'elle redoutait a été annulé.,412,500,557,1363
+30,2,0,Elle envoie un e-mail à son professeur en lui demandant si c'est,580,668,128,1792
+30,2,1,bien le cas. Ce dernier lui confirme que l'examen a été supprimé.,668,756,115,1805
+31,1,0,Jack rentre chez lui et entend des bruits suspects à l'étage. Il,368,456,128,1792
+31,1,1,est inquiet car il habite seul.,456,544,557,1363
+31,2,0,Il marche sur la pointe des pieds en se rapprochant des escaliers.,624,712,102,1818
+32,1,0,Lukas a un nouveau 'match' sur Tinder.,368,456,466,1454
+32,2,0,Il ouvre l'application et découvre que c'est la jolie fille qu'il,536,624,115,1805
+32,2,1,avait 'superlikée' plus tôt dans la journée.,624,712,388,1532
+33,1,0,Cam attend son bus en espérant qu'il ne sera pas trop plein.,412,500,180,1740
+33,2,0,"Le bus qui arrive est hors service, Cam continue à attendre.",580,668,180,1740
+34,1,0,Albert se dirige vers un 'blind-date' que son meilleur ami lui a,280,368,128,1792
+34,1,1,"organisé. À ce qu'il paraît, la fille qu'il va rencontrer est",368,456,167,1753
+34,1,2,magnifique.,456,544,817,1103
+34,2,0,"Lorsque Albert la voit arriver, il est immédiatement sous le",624,712,180,1740
+34,2,1,charme.,712,800,869,1051
+35,1,0,Max a un nouveau match sur Tinder !,368,456,505,1415
+35,2,0,"Il tente d'ouvrir l'application pour voir de qui il s'agit, mais",536,624,128,1792
+35,2,1,son téléphone reste figé sur la page d'accueil.,624,712,349,1571
+36,1,0,Léonard a envie de manger un bon plat ce soir.,412,500,362,1558
+36,2,0,Il va à son restaurant préféré.,580,668,557,1363
+37,1,0,Karen vient de marcher sur quelque chose de collant.,412,500,284,1636
+37,2,0,Elle regarde sous sa chaussure mais il n'y a rien.,580,668,310,1610
+38,1,0,"Comme tous les matins, Ana sort son chien.",412,500,414,1506
+38,2,0,Le soleil réchauffe sa peau.,580,668,596,1324
+39,1,0,Jade se balade avec une amie.,412,500,583,1337
+39,2,0,Elles parlent de leur journée.,580,668,570,1350
+40,1,0,Leo a commandé un écran sur Amazon.,412,500,505,1415
+40,2,0,Il reçoit son colis après 2 jours ouvrables comme prévu.,580,668,232,1688
+41,1,0,Laura aimerait adopter un chaton.,412,500,531,1389
+41,2,0,Elle va sur Internet pour trouver un refuge.,580,668,388,1532
+42,1,0,Robbie se dirige vers le rencard que son meilleur ami lui a,280,368,193,1727
+42,1,1,"arrangé. Selon ce dernier, la fille qu'il va lui présenter est",368,456,154,1766
+42,1,2,magnifique.,456,544,817,1103
+42,2,0,"En allant au rendez-vous, Robbie est très anxieux et il transpire",624,712,115,1805
+42,2,1,beaucoup comme à son habitude.,712,800,570,1350
+43,1,0,Lena doit retirer de l'argent.,412,500,570,1350
+43,2,0,Elle se rend à la banque près de chez elle.,580,668,401,1519
+44,1,0,Une personne toque à la porte de Jim et dépose un colis inattendu.,368,456,102,1818
+44,2,0,"Jim ouvre sa porte, curieux, mais en prenant le colis entre ses",536,624,141,1779
+44,2,1,"mains, il réalise qu'il est destiné à son voisin.",624,712,323,1597
+45,1,0,"Il est 3 heures du matin et Selma marche vers chez elle. Soudain,",324,412,115,1805
+45,1,1,elle entend une femme crier et une voiture arriver en trombe.,412,500,167,1753
+45,2,0,Selma a à peine le temps de comprendre ce qu'il arrive que la,580,668,167,1753
+45,2,1,voiture la percute. Elle décède sur le coup.,668,756,388,1532
+46,1,0,Kim veut partir en voyage mais elle ne sait pas encore où aller.,324,412,128,1792
+46,1,1,Elle commence à regarder des destinations sur Google.,412,500,271,1649
+46,2,0,Elle voit qu'il y a des vols pas chers pour Venise ce week-end et,580,668,115,1805
+46,2,1,elle en réserve un immédiatement.,668,756,531,1389
+47,1,0,Le bus de Cara est en retard.,412,500,583,1337
+47,2,0,Elle continue à attendre.,580,668,635,1285
+48,1,0,Matéo est en train de courir pour attraper son bus lorsque son,280,368,154,1766
+48,1,1,téléphone sonne. Une voix glaciale lui dit qu'un de ses proches a,368,456,115,1805
+48,1,2,eu un accident.,456,544,765,1155
+48,2,0,Matéo s'arrête et le bus lui file sous le nez. Il demande qui est,624,712,115,1805
+48,2,1,à l'appareil mais la ligne se coupe.,712,800,492,1428
+49,1,0,Karl est avec un ami lorsqu'ils croisent une fille avec qui ils,324,412,141,1779
+49,1,1,ont passé la soirée il y a quelques semaines. Karl s'efforce de se,412,500,102,1818
+49,1,2,rappeler son prénom mais n'y parvient pas.,500,588,414,1506
+49,2,0,Il continue de discuter avec elle comme si de rien n'était.,668,756,193,1727
+50,1,0,Nick reçoit un message de sa maman qui lui dit qu'elle a préparé,324,412,128,1792
+50,1,1,un bon repas pour lui.,412,500,674,1246
+50,2,0,Nick rentre avec hâte à la maison et découvre qu'elle lui a fait,580,668,128,1792
+50,2,1,"une pizza, son plat préféré.",668,756,596,1324
+51,1,0,Paul doit rejoindre un ami pour prendre un café.,412,500,336,1584
+51,2,0,Il monte dans le bus pour se rendre au lieu de rendez-vous.,580,668,193,1727
+52,1,0,C'est la veille du Nouvel An et Mike entend des feux d'artifice,368,456,141,1779
+52,1,1,toute la nuit.,456,544,778,1142
+52,2,0,Il met des bouchons d'oreilles pour dormir.,624,712,401,1519
+53,1,0,Simon est en train de courir pour attraper son bus lorsque son,280,368,154,1766
+53,1,1,téléphone sonne. Une voix glaciale lui dit qu'un de ses proches a,368,456,115,1805
+53,1,2,eu un accident.,456,544,765,1155
+53,2,0,Simon s'arrête et le bus lui file sous le nez. Il demande qui est,624,712,115,1805
+53,2,1,à l'appareil mais la ligne se coupe.,712,800,492,1428
+54,1,0,Emma est en train de courir dans un parc lorsqu'elle voit un homme,280,368,102,1818
+54,1,1,au loin qui ressemble à son ami Marcus. Elle commence à courir,368,456,154,1766
+54,1,2,dans sa direction pour vérifier que c'est bien lui.,456,544,297,1623
+54,2,0,Emma se rapproche de l'homme et crie: 'Marcus !'. L'homme se,624,712,180,1740
+54,2,1,retourne en sursautant et la salue chaleureusement.,712,800,297,1623
+55,1,0,Sara a travaillé assidûment pour la thèse qu'elle a rendue le mois,324,412,102,1818
+55,1,1,passé. Elle espère avoir une bonne note.,412,500,440,1480
+55,2,0,"En arrivant en classe, son professeur la félicite immédiatement",580,668,141,1779
+55,2,1,car sa thèse était excellente: Sara a obtenu un 90% !,668,756,271,1649
+56,1,0,Matéo est en retard pour aller au travail lorsque son téléphone,236,324,141,1779
+56,1,1,sonne. Ça alors ! On l'appelle toujours au mauvais moment ! Il,324,412,154,1766
+56,1,2,"décroche, nerveux, et une voix froide lui dit qu'un de ses proches",412,500,102,1818
+56,1,3,a été admis en réanimation à l'hôpital.,500,588,453,1467
+56,2,0,La voix dit à Matéo que son frère vient d'avoir un grave accident,668,756,115,1805
+56,2,1,de voiture.,756,844,817,1103
+57,1,0,Le train de Kim est retardé.,368,456,596,1324
+57,2,0,Elle entend qu'il sera retardé de quelques heures à cause d'un,536,624,154,1766
+57,2,1,problème technique qui affecte les rails de train.,624,712,310,1610
+58,1,0,Serena entend que son examen d'algèbre a été annulé.,412,500,284,1636
+58,2,0,Elle espère que ce soit vrai car elle ne comprend rien en cours.,580,668,128,1792
+59,1,0,Quelqu'un toque à la porte de Pierre et dépose un colis inattendu.,368,456,102,1818
+59,2,0,Pierre ouvre le colis et découvre un parfum offert par sa copine,536,624,128,1792
+59,2,1,Sara.,624,712,895,1025
+60,1,0,Lucie marche dans la rue lorsqu'elle voit une personne au loin qui,324,412,102,1818
+60,1,1,ressemble à son cousin Jérémy.,412,500,570,1350
+60,2,0,"Lucie essaye d'attirer son attention en hurlant son prénom, en",580,668,154,1766
+60,2,1,vain.,668,756,895,1025
+61,1,0,Connor attend son métro en espérant qu'il ne sera pas trop rempli.,368,456,102,1818
+61,2,0,"Le métro qui arrive en station déborde de gens, Connor arrive à",536,624,141,1779
+61,2,1,s'y glisser avec difficulté mais il a du mal à respirer.,624,712,232,1688
+62,1,0,Liam est à la station et il attend son train matinal.,412,500,271,1649
+62,2,0,"Lorsque le train arrive, il monte dedans.",580,668,427,1493
+63,1,0,Andy est à son restaurant préféré et à son habitude il commande,280,368,141,1779
+63,1,1,'La Surprise du Chef' comme plat principal. Il s'agit d'une,368,456,193,1727
+63,1,2,préparation dans laquelle le chef choisit les ingrédients qu'il,456,544,141,1779
+63,1,3,souhaite travailler. Andy espère qu'il va aimer.,544,632,336,1584
+63,2,0,Un parfum incroyable se dégage du plat surprise. Andy se régale.,712,800,128,1792
+64,1,0,Mia se balade avec un ami lorsque soudain il sort un cadeau de son,368,456,102,1818
+64,1,1,sac.,456,544,908,1012
+64,2,0,Son ami lui demande si elle aime le papier cadeau.,624,712,310,1610
+65,1,0,Maja marche avec un ami lorsqu'il sort un cadeau de son sac.,368,456,180,1740
+65,2,0,Elle déballe le cadeau et voit qu'il s'agit du magnifique pull,536,624,154,1766
+65,2,1,qu'elle voulait depuis des mois.,624,712,544,1376
+66,1,0,Mona dort paisiblement dans son lit.,412,500,492,1428
+66,2,0,Elle rêve que son chien court dans le jardin.,580,668,375,1545
+67,1,0,Chloé est sur le point de s'endormir lorsque l'avion sur lequel,236,324,141,1779
+67,1,1,elle voyage commence à faire un bruit sourd depuis le moteur,324,412,180,1740
+67,1,2,gauche.,412,500,869,1051
+67,2,0,"Après quelques minutes, le pilote dit aux passagers qu'une turbine",580,668,102,1818
+67,2,1,dans le moteur est défectueuse mais que cela ne va pas influencer,668,756,115,1805
+67,2,2,leur trajet. Il ajoute qu'il ne faut pas paniquer.,756,844,310,1610
+68,1,0,Ivan adore faire du voilier.,412,500,596,1324
+68,2,0,Il part souvent en navigation pendant l'été.,580,668,388,1532
+69,1,0,Arthur fait la queue à la banque pour retirer de l'argent quand un,324,412,102,1818
+69,1,1,homme cagoulé et armé entre dans le bâtiment.,412,500,375,1545
+69,2,0,Arthur lâche un cri strident et se fait immédiatement tirer,580,668,193,1727
+69,2,1,dessus. Il meurt avant d'arriver aux urgences.,668,756,362,1558
+70,1,0,Matt a une copine.,412,500,726,1194
+70,2,0,Il lui fait beaucoup de cadeaux.,580,668,544,1376
+71,1,0,"Comme chaque matin, Sara se balade dans son quartier lorsqu'elle",324,412,128,1792
+71,1,1,entend quelqu'un chanter bruyamment.,412,500,492,1428
+71,2,0,"Elle regarde derrière elle pour comprendre d'où vient cette voix,",580,668,115,1805
+71,2,1,mais ne voit que des enfants aux alentours.,668,756,401,1519
+72,1,0,Elena fait du tourisme lorsqu'elle sent quelque chose de chaud,368,456,154,1766
+72,1,1,tomber sur son épaule.,456,544,674,1246
+72,2,0,Elle regarde son épaule mais il n'y a rien dessus.,624,712,310,1610
+73,1,0,Mady fait la fête au centre-ville.,412,500,518,1402
+73,2,0,Elle voit beaucoup de personnes qui consomment de l'alcool.,580,668,193,1727
+74,1,0,Theo prend l'avion pour partir en vacances.,412,500,401,1519
+74,2,0,Il a préparé une grande valise avec tous ses habits préférés.,580,668,167,1753
+75,1,0,Emma se balade dans la rue.,412,500,609,1311
+75,2,0,Elle porte des chaussures bleues.,580,668,531,1389
+76,1,0,Julie reçoit un appel de l'hôpital pour lui rappeler qu'elle a un,368,456,115,1805
+76,1,1,rendez-vous avec son dentiste.,456,544,570,1350
+76,2,0,Julie remercie le réceptionniste pour ce rappel.,624,712,336,1584
+77,1,0,Jim habite seul et il rentre tous les jours du travail à 19h. Mais,236,324,102,1818
+77,1,1,"vendredi dernier, en passant le seuil de sa porte, un bruit",324,412,193,1727
+77,1,2,inquiétant venant de l'étage l'a surpris.,412,500,427,1493
+77,2,0,"Après avoir monté les escaliers en courant, il découvre qu'un",580,668,167,1753
+77,2,1,oiseau s'est introduit dans sa chambre par la fenêtre et a détruit,668,756,102,1818
+77,2,2,son vase préféré.,756,844,739,1181
+78,1,0,La maman d'Ethan lui envoie un message en disant qu'elle va lui,324,412,141,1779
+78,1,1,préparer un bon repas.,412,500,674,1246
+78,2,0,"Curieux, Ethan essaye de l'appeler pour en savoir plus mais son",580,668,141,1779
+78,2,1,téléphone s'éteint.,668,756,713,1207
+79,1,0,Kevin est un fervent supporter de l'équipe nationale de football.,368,456,115,1805
+79,2,0,Il regarde tous les matchs et connaît les particularités de chaque,536,624,102,1818
+79,2,1,joueur.,624,712,869,1051
+80,1,0,Sara marche vers chez elle au milieu de la nuit.,412,500,336,1584
+80,2,0,Des voitures passent le long de la rue.,580,668,453,1467
+81,1,0,Soline a travaillé d'arrache-pied sur son devoir le mois passé.,324,412,141,1779
+81,1,1,Elle se rend en classe et espère recevoir une très bonne note.,412,500,154,1766
+81,2,0,Son professeur lui dit qu'il n'a pas encore fini de corriger les,580,668,128,1792
+81,2,1,devoirs.,668,756,856,1064
+82,1,0,Nelly aimerait adopter un chaton et elle espère en trouver un au,324,412,128,1792
+82,1,1,refuge de la ville.,412,500,713,1207
+82,2,0,"Lorsqu'elle arrive au refuge, Nelly identifie immédiatement le",580,668,154,1766
+82,2,1,chaton de ses rêves: un tout noir avec des petites oreilles.,668,756,180,1740
+83,1,0,Mara est dans ses pensées lorsque l'avion dans lequel elle voyage,368,456,115,1805
+83,1,1,perd de l'altitude violemment. Tout le monde commence à hurler.,456,544,141,1779
+83,2,0,L'hôtesse de l'air la plus proche s'évanouit.,624,712,375,1545
+84,1,0,Ava a acheté un nouveau sac à main de luxe et elle a hâte de le,324,412,141,1779
+84,1,1,montrer à ses copines.,412,500,674,1246
+84,2,0,Ava est très satisfaite de son achat et elle s'entraîne à défiler,580,668,115,1805
+84,2,1,avec dans son salon comme le font les stars.,668,756,388,1532
+85,1,0,Megan est en train de bronzer sur son bateau lorsqu'elle entrevoit,236,324,102,1818
+85,1,1,une tempête se former à quelques nœuds.,324,412,453,1467
+85,2,0,Il commence à pleuvoir et elle essaye de s'abriter. Des vagues de,492,580,115,1805
+85,2,1,"plusieurs mètres s'abattent sur le mât du bateau, Megan perd",580,668,180,1740
+85,2,2,l'équilibre et tombe dans l'eau. Elle se bat contre les vagues,668,756,154,1766
+85,2,3,"pendant plusieurs minutes mais, exténuée, elle se noie.",756,844,245,1675
+86,1,0,Alexandra aimerait adopter un chat et elle espère en trouver un au,324,412,102,1818
+86,1,1,refuge.,412,500,869,1051
+86,2,0,Mais elle est inquiète car son chien a mauvais caractère et il,580,668,154,1766
+86,2,1,pourrait mal réagir à l'arrivée d'un chaton à la maison.,668,756,232,1688
+87,1,0,"Mira rentre chez elle en pleine nuit, vers 3 heures du matin,",324,412,167,1753
+87,1,1,lorsqu'elle entend une moto arriver rapidement dans son dos et des,412,500,102,1818
+87,1,2,cris stridents.,500,588,765,1155
+87,2,0,Elle se retourne pour regarder ce qu'il se passe.,668,756,323,1597
+88,1,0,Lucille ne trouve pas son portable.,368,456,505,1415
+88,2,0,Elle regarde partout dans la maison mais il n'y a pas de trace de,536,624,115,1805
+88,2,1,son téléphone.,624,712,778,1142
+89,1,0,Lorena est en retard pour son rendez-vous. Elle s'apprête à sortir,324,412,102,1818
+89,1,1,mais elle ne trouve pas son téléphone.,412,500,466,1454
+89,2,0,Elle se souvient soudain qu'elle l'a laissé dans les cabines à la,580,668,115,1805
+89,2,1,gym ce matin.,668,756,791,1129
+90,1,0,"Bob regarde une finale de Coupe du monde, son équipe préférée a",324,412,141,1779
+90,1,1,des chances de gagner !,412,500,661,1259
+90,2,0,"Bob ne quitte pas l'écran des yeux, jusqu'au moment où son équipe",580,668,115,1805
+90,2,1,devient enfin championne du monde !,668,756,505,1415
+91,1,0,"Lorenzo est à son restaurant favori, il adore y aller car son ami",280,368,115,1805
+91,1,1,Aaron est le chef. Lorenzo a hâte de goûter ce qu'Aaron va lui,368,456,154,1766
+91,1,2,"préparer vu que chaque fois qu'il mange chez lui, il découvre de",456,544,128,1792
+91,1,3,nouvelles saveurs.,544,632,726,1194
+91,2,0,"L'attente est plus longue que d'habitude, Lorenzo a très faim.",712,800,154,1766
+92,1,0,Mara a bientôt un examen de la plus haute importance.,412,500,271,1649
+92,2,0,Elle passe toutes ses journées à la bibliothèque.,580,668,323,1597
+93,1,0,Erin voyage en avion.,412,500,687,1233
+93,2,0,Elle a bouclé sa ceinture.,580,668,622,1298
+94,1,0,"En sortant de l'école, Justine réalise qu'elle a oublié son",368,456,193,1727
+94,1,1,téléphone en classe.,456,544,700,1220
+94,2,0,Elle décide de retourner à l'école pour le récupérer.,624,712,271,1649
+95,1,0,Sam se fait réveiller par l'aboiement de son chien en pleine nuit.,236,324,102,1818
+95,1,1,Il se dit que c'est étrange étant donné que son chien est,324,412,219,1701
+95,1,2,d'habitude très calme.,412,500,674,1246
+95,2,0,Il se lève pour aller voir si son chien va bien. Une fois en bas,580,668,128,1792
+95,2,1,"des escaliers, il se frotte les yeux pour être sûr de bien voir ce",668,756,102,1818
+95,2,2,qu'il se passe : son chien a une souris dans la gueule.,756,844,245,1675
+96,1,0,Justine bronze en pleine mer lorsqu'elle voit une tornade se,368,456,180,1740
+96,1,1,former au loin.,456,544,765,1155
+96,2,0,Un frisson parcourt sa colonne vertébrale.,624,712,414,1506
