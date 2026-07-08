@@ -93,8 +93,20 @@ class CatchTrials:
 class GazeData:
     def __init__(self, path):
         self.path = path
-        self.df = pd.read_csv(path, sep="\t")
+        try:
+            self.df = pd.read_csv(path, sep=None, engine="python")
+        except Exception:
+            self.df = pd.read_csv(path, sep="\t")
+
         self.df.columns = self.df.columns.str.strip()
+
+        if "USER" not in self.df.columns:
+            alt = next((c for c in self.df.columns if c.lower() in {"user", "event", "msg", "trigger"}), None)
+            if alt is not None:
+                self.df = self.df.rename(columns={alt: "USER"})
+            else:
+                raise KeyError("Expected a USER-like event column in gaze data, but none was found.")
+
         self.gaze_reg = None
 
     # ── Column groups ────────────────────────────────────────────────────────
