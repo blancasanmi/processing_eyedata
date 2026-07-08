@@ -31,6 +31,10 @@ class Experiment:
         if df is not None:
             return df[df["task"] == "reading"]
         return None
+    
+    def get_sentencefirst_and_idx(self):
+        df = self.get_reading_df()[["sentence_first", "presentation_index"]]
+        return df
 
     def get_presentation_row(self, pres_nr: int):
         df = self.get_reading_df()

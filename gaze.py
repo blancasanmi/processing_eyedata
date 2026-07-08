@@ -95,6 +95,7 @@ class GazeData:
         self.path = path
         self.df = pd.read_csv(path, sep="\t")
         self.df.columns = self.df.columns.str.strip()
+        self.gaze_reg = None
 
     # ── Column groups ────────────────────────────────────────────────────────
 
@@ -294,9 +295,92 @@ class GazeData:
             fixations = fixations[fixations["line_idx"].notna()].reset_index(drop=True)
 
         return fixations
+    
+    def gaze_on_screen(self, df_position):
+        """Return gaze samples per presentation and line for all presentations.
+        Returns dict: {(pres, part_nr): {line_idx: df_of_gaze_samples}}"""
 
+        self.all_results = {}
+        self.gaze_reg = {}
+
+        for pres in df_position["presentation_index"].unique():
+            df_pres = df_position[df_position["presentation_index"] == pres].copy()
+
+            try:
+                df_gaze = self.gaze_during_pres(pres)
+            except ValueError:
+                print(f"Warning: no gaze data found for presentation {pres}, skipping.")
+                continue
+
+            df_pres["top_norm"]    = df_pres["top"]    / SCREEN_H
+            df_pres["bottom_norm"] = df_pres["bottom"] / SCREEN_H
+            df_pres["left_norm"]   = df_pres["left"]   / SCREEN_W
+            df_pres["right_norm"]  = df_pres["right"]  / SCREEN_W
+
+            for part_nr, df_part in df_pres.groupby("part_nr"):
+                line_results = {}
+                for _, line in df_part.iterrows():
+                    mask = (
+                        (df_gaze["BPOGX"] >= line["left_norm"])  &
+                        (df_gaze["BPOGX"] <= line["right_norm"]) &
+                        (df_gaze["BPOGY"] >= line["top_norm"])   &
+                        (df_gaze["BPOGY"] <= line["bottom_norm"]) &
+                        (df_gaze["BPOGV"] == 1)
+                    )
+                    line_results[line["line_idx"]] = df_gaze[mask].reset_index(drop=True)
+
+                self.all_results[(pres, part_nr)] = line_results
+
+            part2_results = self.all_results.get((pres, 2), {})
+            part2_timestamps = [line_df["TIME"].min() for line_df in part2_results.values() if not line_df.empty]
+            t_part2_start = min(part2_timestamps) if part2_timestamps else None
+
+            part1_results = self.all_results.get((pres, 1), {})
+            reg_results = {}
+            for line_idx, line_df in part1_results.items():
+                if t_part2_start is None:
+                    reg_results[line_idx] = line_df
+                else:
+                    reg_results[line_idx] = line_df[line_df["TIME"] >= t_part2_start].reset_index(drop=True)
+            self.gaze_reg[(pres, 1)] = reg_results
+
+        return self.all_results
+
+    def get_reg_gaze(self):
+        """Return regression gaze samples (gaze on part 1 after part 2 started).
+        Must call gaze_on_screen() first."""
+        if self.gaze_reg is None:
+            raise ValueError("gaze_reg is None — call gaze_on_screen() first.")
+        return self.gaze_reg
+
+    def gaze_fix_stats(self, df_position, n_pres=97) -> pd.DataFrame:
+        """Return a DataFrame with regression gaze sample count
+        and fixation count per presentation."""
+        data = self.get_reg_gaze()
+
+        rows = []
+        for i in range(n_pres):
+            res = data.get((i, 1), {})
+            total_gaze = sum(len(df) for df in res.values())
+
+            try:
+                fixations = self.filter_part2_to_part1_saccades(
+                    pres=i, df_position=df_position
+                )
+                total_fixations = len(fixations)
+            except ValueError:
+                total_fixations = 0
+
+            rows.append({
+                "presentation": i,
+                "gaze_samples": total_gaze,
+                "fixations": total_fixations,
+            })
+
+        return pd.DataFrame(rows)
+    
     def saccades_movement(self, pres, df_position=None, y_line_threshold=0.03):
-        """Compute saccade vectors between consecutive IN-BOX fixations only
+        """Compute saccade vectors between consecutive IN-BOX fixations
         (fixations outside any text box are excluded before computing saccades).
         Classifies each saccade as:
         - 'progressive'             : forward reading movement (including skipping down a line)
@@ -306,13 +390,16 @@ class GazeData:
         is_regression is 1 for either regression type, 0 for progressive.
         """
         fixations = self.get_fixation_sequence(pres)
+
         if df_position is not None:
             # drop_unmatched=True by default -> only fixations inside a box are kept
             fixations = self.assign_line_to_fixations(df_position, pres, fixations)
-        else:
-            # No boxes available to filter by -> can't guarantee in-box fixations,
-            # but keep behavior consistent with prior calls
-            pass
+
+        columns = [
+            "pres", "from_time", "to_time", "from_fpogid", "to_fpogid",
+            "from_part", "to_part",
+            "dx", "dy", "amplitude", "saccade_type", "is_regression",
+        ]
 
         rows = []
         for i in range(1, len(fixations)):
@@ -337,65 +424,25 @@ class GazeData:
                 else:
                     sac_type = "progressive"
 
-            rows.append({
-                "pres"          : pres,
-                "from_time"     : prev["TIME"],
-                "to_time"       : curr["TIME"],
-                "from_fpogid"   : prev["FPOGID"],
-                "to_fpogid"     : curr["FPOGID"],
-                "dx"            : round(dx, 4),
-                "dy"            : round(dy, 4),
-                "amplitude"     : round(amplitude, 4),
-                "saccade_type"  : sac_type,
-                "is_regression" : int(sac_type != "progressive"),
-            })
+            values = [
+                pres, prev["TIME"], curr["TIME"], prev["FPOGID"], curr["FPOGID"],
+                prev.get("part_nr", np.nan), curr.get("part_nr", np.nan),
+                round(dx, 4), round(dy, 4), round(amplitude, 4),
+                sac_type, int(sac_type != "progressive"),
+            ]
+            rows.append(dict(zip(columns, values)))
 
-        return pd.DataFrame(rows)
+        return pd.DataFrame(rows, columns=columns)
 
 
-    # ── Visualisation ────────────────────────────────────────────────────────
+    def filter_part2_to_part1_saccades(self, pres, df_position=None, saccades=None):
+        """Keep only saccades where the gaze moves from a part-2 fixation
+        directly to a part-1 fixation (true regressions back to part 1)."""
+        if saccades is None:
+            saccades = self.saccades_movement(pres, df_position=df_position)
 
-    def plot_gaze_path(self):
-        """Scatter plot of best POG gaze path over time."""
-        pog = self.best_pog()
-        plt.figure(figsize=(8, 6))
-        scatter = plt.scatter(pog["BPOGX"], pog["BPOGY"],
-                              c=pog["TIME"], cmap="viridis", s=5, alpha=0.6)
-        plt.colorbar(scatter, label="Time (s)")
-        plt.gca().invert_yaxis()          # screen coords: 0,0 is top-left
-        plt.title("Gaze path (best POG)")
-        plt.xlabel("X (normalised)")
-        plt.ylabel("Y (normalised)")
-        plt.tight_layout()
-        plt.show()
-
-    def plot_fixations(self):
-        """Bubble plot of fixations — bubble size encodes duration."""
-        fix = self.df[self.df["FPOGV"] == 1].drop_duplicates("FPOGID")
-        plt.figure(figsize=(8, 6))
-        plt.scatter(fix["FPOGX"], fix["FPOGY"],
-                    s=fix["FPOGD"] * 500, alpha=0.5, edgecolors="steelblue", facecolors="none")
-        plt.gca().invert_yaxis()
-        plt.title("Fixations (size = duration)")
-        plt.xlabel("X (normalised)")
-        plt.ylabel("Y (normalised)")
-        plt.tight_layout()
-        plt.show()
-
-    def plot_pupil_diameter(self):
-        """Line plot of pupil diameter over time for both eyes."""
-        df = self.df.copy()
-        left  = df[df["LPV"] == 1][["TIME", "LPD"]]
-        right = df[df["RPV"] == 1][["TIME", "RPD"]]
-        plt.figure(figsize=(10, 4))
-        plt.plot(left["TIME"],  left["LPD"],  label="Left",  alpha=0.7)
-        plt.plot(right["TIME"], right["RPD"], label="Right", alpha=0.7)
-        plt.title("Pupil diameter over time")
-        plt.xlabel("Time (s)")
-        plt.ylabel("Diameter (px)")
-        plt.legend()
-        plt.tight_layout()
-        plt.show()
+        mask = (saccades["from_part"] == 2) & (saccades["to_part"] == 1)
+        return saccades[mask].reset_index(drop=True)
 
     # ── Summary ──────────────────────────────────────────────────────────────
 
@@ -454,6 +501,52 @@ class GazeData:
                 "n_valid"     : len(both),
             })
         return pd.DataFrame(rows)
+    
+
+
+    # ── Visualisation ────────────────────────────────────────────────────────
+
+    def plot_gaze_path(self):
+        """Scatter plot of best POG gaze path over time."""
+        pog = self.best_pog()
+        plt.figure(figsize=(8, 6))
+        scatter = plt.scatter(pog["BPOGX"], pog["BPOGY"],
+                              c=pog["TIME"], cmap="viridis", s=5, alpha=0.6)
+        plt.colorbar(scatter, label="Time (s)")
+        plt.gca().invert_yaxis()          # screen coords: 0,0 is top-left
+        plt.title("Gaze path (best POG)")
+        plt.xlabel("X (normalised)")
+        plt.ylabel("Y (normalised)")
+        plt.tight_layout()
+        plt.show()
+
+    def plot_fixations(self):
+        """Bubble plot of fixations — bubble size encodes duration."""
+        fix = self.df[self.df["FPOGV"] == 1].drop_duplicates("FPOGID")
+        plt.figure(figsize=(8, 6))
+        plt.scatter(fix["FPOGX"], fix["FPOGY"],
+                    s=fix["FPOGD"] * 500, alpha=0.5, edgecolors="steelblue", facecolors="none")
+        plt.gca().invert_yaxis()
+        plt.title("Fixations (size = duration)")
+        plt.xlabel("X (normalised)")
+        plt.ylabel("Y (normalised)")
+        plt.tight_layout()
+        plt.show()
+
+    def plot_pupil_diameter(self):
+        """Line plot of pupil diameter over time for both eyes."""
+        df = self.df.copy()
+        left  = df[df["LPV"] == 1][["TIME", "LPD"]]
+        right = df[df["RPV"] == 1][["TIME", "RPD"]]
+        plt.figure(figsize=(10, 4))
+        plt.plot(left["TIME"],  left["LPD"],  label="Left",  alpha=0.7)
+        plt.plot(right["TIME"], right["RPD"], label="Right", alpha=0.7)
+        plt.title("Pupil diameter over time")
+        plt.xlabel("Time (s)")
+        plt.ylabel("Diameter (px)")
+        plt.legend()
+        plt.tight_layout()
+        plt.show()
 
     def plot_pupil_per_presentation(self):
         """Plot mean pupil diameter ± std across presentations."""
@@ -470,117 +563,14 @@ class GazeData:
         plt.tight_layout()
         plt.show()
 
-    def gaze_on_screen(self, df_position):
-        """Return gaze samples per presentation and line for all presentations.
-        Returns dict: {(pres, part_nr): {line_idx: df_of_gaze_samples}}"""
-
-        self.all_results = {}
-        self._df_gaze_by_pres = {}   # keep raw gaze per presentation for gaze_regression()
-        self._boxes_by_pres = {}     # keep normalized box coords per presentation
-
-        for pres in df_position["presentation_index"].unique():
-            df_pres = df_position[df_position["presentation_index"] == pres].copy()
-
-            try:
-                df_gaze = self.gaze_during_pres(pres)
-            except ValueError:
-                print(f"Warning: no gaze data found for presentation {pres}, skipping.")
-                continue
-
-            df_pres["top_norm"]    = df_pres["top"]    / SCREEN_H
-            df_pres["bottom_norm"] = df_pres["bottom"] / SCREEN_H
-            df_pres["left_norm"]   = df_pres["left"]   / SCREEN_W
-            df_pres["right_norm"]  = df_pres["right"]  / SCREEN_W
-
-            self._df_gaze_by_pres[pres] = df_gaze
-            self._boxes_by_pres[pres] = df_pres
-
-            for part_nr, df_part in df_pres.groupby("part_nr"):
-                line_results = {}
-                for _, line in df_part.iterrows():
-                    mask = (
-                        (df_gaze["BPOGX"] >= line["left_norm"])  &
-                        (df_gaze["BPOGX"] <= line["right_norm"]) &
-                        (df_gaze["BPOGY"] >= line["top_norm"])   &
-                        (df_gaze["BPOGY"] <= line["bottom_norm"]) &
-                        (df_gaze["BPOGV"] == 1)
-                    )
-                    line_results[line["line_idx"]] = df_gaze[mask].reset_index(drop=True)
-
-                self.all_results[(pres, part_nr)] = line_results
-
-        return self.all_results  # {(pres, part_nr): {line_idx: df}}
-    
-    def get_reg_gaze(self, pres):
-        if self.gaze_reg is None:
-            self.gaze_regression()
-        return self.gaze_reg.get((pres, 1), {}) 
-
-
-    def gaze_regression(self, part1_nr=1, part2_nr=2, time_col="TIME"):
-        """
-        Identify gaze 'regressions': samples timestamped after part 2 has started,
-        but spatially landing within part 1's boxes.
-
-        For each presentation, part-2 start time = the earliest timestamp among
-        gaze samples already found (in gaze_on_screen) to fall inside ANY part-2 box.
-
-        Returns dict: {(pres, part1_nr): {line_idx: df_of_gaze_samples}}
-        Each df keeps all original gaze/trigger columns intact.
-        """
-        if not self.all_results:
-            raise ValueError("gaze_on_screen() must be called first to compute results.")
-
-        self.gaze_reg = {}
-
-        for pres, df_gaze in self._df_gaze_by_pres.items():
-            part2_key = (pres, part2_nr)
-            if part2_key not in self.all_results:
-                continue  # no part 2 in this presentation
-
-            part2_timestamps = [
-                df_line[time_col].min()
-                for df_line in self.all_results[part2_key].values()
-                if not df_line.empty
-            ]
-            if not part2_timestamps:
-                print(f"Warning: no gaze landed on part 2 boxes for presentation {pres}, skipping.")
-                continue
-
-            t_part2_start = min(part2_timestamps)
-
-            # all gaze samples timestamped after part 2 began
-            df_after = df_gaze[df_gaze[time_col] >= t_part2_start]
-
-            # part 1's boxes for this presentation
-            df_part1_boxes = self._boxes_by_pres[pres]
-            df_part1_boxes = df_part1_boxes[df_part1_boxes["part_nr"] == part1_nr]
-
-            line_results = {}
-            for _, line in df_part1_boxes.iterrows():
-                mask = (
-                    (df_after["BPOGX"] >= line["left_norm"])  &
-                    (df_after["BPOGX"] <= line["right_norm"]) &
-                    (df_after["BPOGY"] >= line["top_norm"])   &
-                    (df_after["BPOGY"] <= line["bottom_norm"]) &
-                    (df_after["BPOGV"] == 1)
-                )
-                line_results[line["line_idx"]] = df_after[mask].reset_index(drop=True)
-
-            self.gaze_reg[(pres, part1_nr)] = line_results
-
-        return self.gaze_reg  # {(pres, part1_nr): {line_idx: df}}
-        
-    
     def _fontsize_for_box(self, fig, ax, text, box_width_px, box_height_px, font_px=40):
         """Return a font size in points that stays within a box."""
         if not text:
-            return self._px_to_fontsize(fig, ax, FONT_SIZE)
-
-        width_based_px = FONT_SIZE
+            return self._px_to_fontsize(fig, ax, font_px)
+        width_based_px = self._derive_font_px_from_box(text, box_width_px)
         height_based_px = max(box_height_px * 0.75, 1)
         fit_px = min(width_based_px, height_based_px, font_px)
-        return self._px_to_fontsize(fig, ax, FONT_SIZE)
+        return self._px_to_fontsize(fig, ax, fit_px)
 
     def plot_saccades_on_text(self, df_position, pres, saccades=None, show_gaze=False, results=None, font_px=40):
         SACCADE_COLORS = {
@@ -592,13 +582,16 @@ class GazeData:
         if saccades is None:
             saccades = self.saccades_movement(pres, df_position=df_position)
 
+        # Keep only saccades that jump from a part-2 fixation to a part-1 fixation
+        saccades = self.filter_part2_to_part1_saccades(pres, df_position=df_position, saccades=saccades)
+
         fig_width = 12
         fig_height = fig_width * (SCREEN_H / SCREEN_W)
         fig, ax = plt.subplots(figsize=(fig_width, fig_height))
         ax.set_xlim(0, SCREEN_W)
         ax.set_ylim(0, SCREEN_H)
         ax.invert_yaxis()
-        ax.set_title(f"Saccades — presentation {pres} (regressions highlighted)")
+        ax.set_title(f"Saccades — presentation {pres} (part 2 → part 1 regressions)")
         ax.set_xlabel("X (px)")
         ax.set_ylabel("Y (px)")
         plt.tight_layout()
@@ -624,8 +617,8 @@ class GazeData:
             ax.text(
                 (line["left"] + line["right"]) / 2,
                 (line["top"] + line["bottom"]) / 2,
-                line["text"], fontsize=fontsize_pt, family="monospace", color="#111",
-                ha="center", va="center", alpha=0.7, zorder=1
+                line["text"], fontsize=fontsize_pt, family="monospace", color="#111111",
+                ha="center", va="center", zorder=2
             )
 
         if show_gaze:
@@ -693,13 +686,11 @@ class GazeData:
         font_size = (box_width_px - spacing_total) / (n_chars * char_width_ratio)
         return max(font_size, 1)  # guard against negative/zero from bad data
 
-    def plot_gaze_on_text(self, df_position, pres, results=None, gaze_reg=None, font_px=40):
+    def plot_gaze_on_text(self, df_position, pres, results=None, time_col="TIME", font_px=40):
         df_pres = df_position[df_position["presentation_index"] == pres].copy()
 
         if results is None:
             results = self.gaze_on_screen(df_position)
-        if gaze_reg is None:
-            gaze_reg = self.gaze_regression()
 
         # ── All gaze samples (both parts) ──────────────────────────────
         all_gaze = []
@@ -714,18 +705,27 @@ class GazeData:
             print(f"No gaze data for presentation {pres}")
             return
 
-        all_gaze = pd.concat(all_gaze).reset_index(drop=True)
+        all_gaze = pd.concat(all_gaze).drop_duplicates().reset_index(drop=True)
 
-        # ── Regression gaze samples for this presentation ──────────────
-        reg_line_results = gaze_reg.get((pres, 1), {})
-        reg_gaze = [df for df in reg_line_results.values() if not df.empty]
-        reg_gaze = pd.concat(reg_gaze).reset_index(drop=True) if reg_gaze else pd.DataFrame()
+        # ── Determine when part 2 starts (earliest gaze landing on any part-2 box) ──
+        part2_line_results = results.get((pres, 2), {})
+        part2_timestamps = [df_line[time_col].min() for df_line in part2_line_results.values() if not df_line.empty]
 
-        # ── Debug: tell us what we actually have ────────────────────────
-        print(f"[pres {pres}] total gaze samples: {len(all_gaze)}")
-        print(f"[pres {pres}] presentations available in gaze_reg: {list(gaze_reg.keys())}")
-        print(f"[pres {pres}] lines available in gaze_reg[({pres}, 1)]: {list(reg_line_results.keys())}")
-        print(f"[pres {pres}] regression samples: {len(reg_gaze)}")
+        if not part2_timestamps:
+            print(f"[pres {pres}] WARNING: no gaze landed on part 2 boxes — can't determine part 2 start, nothing highlighted.")
+            t_part2_start = None
+        else:
+            t_part2_start = min(part2_timestamps)
+
+        # ── Split gaze into before / after part 2 start ─────────────────
+        if t_part2_start is not None:
+            before = all_gaze[all_gaze[time_col] < t_part2_start]
+            after  = all_gaze[all_gaze[time_col] >= t_part2_start]
+        else:
+            before = all_gaze
+            after = pd.DataFrame(columns=all_gaze.columns)
+
+        print(f"[pres {pres}] total gaze: {len(all_gaze)} | before part 2: {len(before)} | from part 2 start onward: {len(after)}")
 
         # ── Plot ─────────────────────────────────────────────────────
         fig_width = 12
@@ -764,23 +764,20 @@ class GazeData:
                     ha="center", va="center", zorder=2
                 )
 
-        # All gaze in grey (base layer)
+        # Gaze before part 2 starts — grey
         ax.scatter(
-            all_gaze["BPOGX"] * SCREEN_W,
-            all_gaze["BPOGY"] * SCREEN_H,
-            s=15, alpha=0.4, color="grey", zorder=3, label="gaze"
+            before["BPOGX"] * SCREEN_W,
+            before["BPOGY"] * SCREEN_H,
+            s=15, alpha=0.4, color="grey", zorder=3, label="before part 2"
         )
 
-        # Regressions in yellow, drawn last, on top, bigger + outlined
-        if not reg_gaze.empty:
+        # Gaze from part 2 start onward — soft yellow
+        if not after.empty:
             ax.scatter(
-                reg_gaze["BPOGX"] * SCREEN_W,
-                reg_gaze["BPOGY"] * SCREEN_H,
-                s=60, alpha=0.9, color="yellow", edgecolor="black", linewidth=0.6,
-                zorder=5, label="regression"
+                after["BPOGX"] * SCREEN_W,
+                after["BPOGY"] * SCREEN_H,
+                s=15, alpha=0.35, color="red", zorder=4, label="from part 2 start"
             )
-        else:
-            print(f"[pres {pres}] WARNING: no regression samples found — nothing yellow to plot.")
 
         ax.legend(loc="upper right")
         plt.tight_layout()
