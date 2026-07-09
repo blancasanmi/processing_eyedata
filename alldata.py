@@ -250,6 +250,8 @@ class DataAggregator:
                 std_gaze_samples=("gaze_samples", "std"),
                 mean_fixations=("fixations", "mean"),
                 std_fixations=("fixations", "std"),
+                mean_horizontal_fixations=("horizontal_fixations", "mean"),
+                std_horizontal_fixations=("horizontal_fixations", "std"),
                 n_participants=("participant", "count")
             )
             .reset_index()

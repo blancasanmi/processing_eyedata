@@ -365,10 +365,45 @@ class GazeData:
             raise ValueError("gaze_reg is None — call gaze_on_screen() first.")
         return self.gaze_reg
 
+    def get_part2_start_time(self, pres, df_position, results=None, time_col="TIME"):
+        """Earliest gaze timestamp landing on any part-2 box for this presentation.
+        Returns None if no gaze landed on part 2 (cutoff undefined)."""
+        if results is None:
+            results = self.gaze_on_screen(df_position)
+
+        part2_line_results = results.get((pres, 2), {})
+        part2_timestamps = [
+            df_line[time_col].min()
+            for df_line in part2_line_results.values()
+            if not df_line.empty
+        ]
+
+        if not part2_timestamps:
+            return None
+        return min(part2_timestamps)
+
+    def get_total_horizontal_fixations(self, pres, df_position=None, y_line_threshold=0.03, part_nr=1, results=None, time_col="TIME"):
+        """Count within_line_regression saccades inside the given part_nr,
+        restricted to saccades occurring at/after part 2's first gaze landing."""
+        saccades = self.saccades_movement(pres, df_position=df_position, y_line_threshold=y_line_threshold)
+
+        t_part2_start = self.get_part2_start_time(pres, df_position, results=results, time_col=time_col)
+        if t_part2_start is None:
+            return 0
+
+        mask = (
+            (saccades["saccade_type"] == "within_line_regression")
+            & (saccades["from_part"] == part_nr)
+            & (saccades["to_part"] == part_nr)
+            & (saccades["from_time"] >= t_part2_start)
+        )
+        return int(mask.sum())
+
     def gaze_fix_stats(self, df_position, n_pres=97) -> pd.DataFrame:
         """Return a DataFrame with regression gaze sample count
         and fixation count per presentation."""
         data = self.get_reg_gaze()
+        results = self.gaze_on_screen(df_position)
 
         rows = []
         for i in range(n_pres):
@@ -383,10 +418,13 @@ class GazeData:
             except ValueError:
                 total_fixations = 0
 
+            total_horizontal_fixations = self.get_total_horizontal_fixations(i, df_position, results=results)
+
             rows.append({
                 "presentation": i,
                 "gaze_samples": total_gaze,
                 "fixations": total_fixations,
+                "horizontal_fixations": total_horizontal_fixations,
             })
 
         return pd.DataFrame(rows)
@@ -586,16 +624,33 @@ class GazeData:
 
     def plot_saccades_on_text(self, df_position, pres, saccades=None, show_gaze=False, results=None, font_px=40):
         SACCADE_COLORS = {
-        "progressive"            : "green",
-        "line_regression"        : "red",
-        "within_line_regression" : "orange",
+        "progressive"                        : "green",
+        "line_regression"                    : "red",
+        "within_line_regression"             : "orange",
+        "within_line_regression_part1"       : "gold",
         }
         df_pres = df_position[df_position["presentation_index"] == pres].copy()
         if saccades is None:
             saccades = self.saccades_movement(pres, df_position=df_position)
 
+        if results is None:
+            results = self.gaze_on_screen(df_position)
+
         # Keep only saccades that jump from a part-2 fixation to a part-1 fixation
-        saccades = self.filter_part2_to_part1_saccades(pres, df_position=df_position, saccades=saccades)
+        part2_to_part1 = self.filter_part2_to_part1_saccades(pres, df_position=df_position, saccades=saccades)
+
+        # Within-line regressions inside part 1, restricted to after part 2 first appeared
+        # (same cutoff used for the red gaze points and get_total_horizontal_fixations)
+        t_part2_start = self.get_part2_start_time(pres, df_position, results=results)
+        if t_part2_start is not None:
+            within_part1_horizontal = saccades[
+                (saccades["saccade_type"] == "within_line_regression")
+                & (saccades["from_part"] == 1)
+                & (saccades["to_part"] == 1)
+                & (saccades["from_time"] >= t_part2_start)
+            ].copy()
+        else:
+            within_part1_horizontal = saccades.iloc[0:0].copy()
 
         fig_width = 12
         fig_height = fig_width * (SCREEN_H / SCREEN_W)
@@ -603,7 +658,7 @@ class GazeData:
         ax.set_xlim(0, SCREEN_W)
         ax.set_ylim(0, SCREEN_H)
         ax.invert_yaxis()
-        ax.set_title(f"Saccades — presentation {pres} (part 2 → part 1 regressions)")
+        ax.set_title(f"Saccades — presentation {pres} (part 2 → part 1 regressions, part 1 horizontal regressions after part 2 start)")
         ax.set_xlabel("X (px)")
         ax.set_ylabel("Y (px)")
         plt.tight_layout()
@@ -634,8 +689,6 @@ class GazeData:
             )
 
         if show_gaze:
-            if results is None:
-                results = self.gaze_on_screen(df_position)
             for (p, part_nr), line_dict in results.items():
                 if p != pres:
                     continue
@@ -645,14 +698,19 @@ class GazeData:
                                 s=8, alpha=0.15, color="gray", zorder=2)
 
         fixations = self.assign_line_to_fixations(df_position, pres)
-        for _, sac in saccades.iterrows():
-            prev = fixations[fixations["FPOGID"] == sac["from_fpogid"]].iloc[0]
-            curr = fixations[fixations["FPOGID"] == sac["to_fpogid"]].iloc[0]
-            x0, y0 = prev["FPOGX"] * SCREEN_W, prev["FPOGY"] * SCREEN_H
-            x1, y1 = curr["FPOGX"] * SCREEN_W, curr["FPOGY"] * SCREEN_H
-            color = SACCADE_COLORS[sac["saccade_type"]]
-            ax.annotate("", xy=(x1, y1), xytext=(x0, y0),
-                        arrowprops=dict(arrowstyle="->", color=color, alpha=0.8, lw=1.3), zorder=4)
+
+        def _draw_saccades(sac_df, color_key_override=None):
+            for _, sac in sac_df.iterrows():
+                prev = fixations[fixations["FPOGID"] == sac["from_fpogid"]].iloc[0]
+                curr = fixations[fixations["FPOGID"] == sac["to_fpogid"]].iloc[0]
+                x0, y0 = prev["FPOGX"] * SCREEN_W, prev["FPOGY"] * SCREEN_H
+                x1, y1 = curr["FPOGX"] * SCREEN_W, curr["FPOGY"] * SCREEN_H
+                color = SACCADE_COLORS[color_key_override or sac["saccade_type"]]
+                ax.annotate("", xy=(x1, y1), xytext=(x0, y0),
+                            arrowprops=dict(arrowstyle="->", color=color, alpha=0.8, lw=1.3), zorder=4)
+
+        _draw_saccades(part2_to_part1)
+        _draw_saccades(within_part1_horizontal, color_key_override="within_line_regression_part1")
 
         from matplotlib.lines import Line2D
         legend_elems = [Line2D([0], [0], color=c, lw=2, label=t.replace("_", " "))
