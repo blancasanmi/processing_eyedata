@@ -116,7 +116,8 @@ class DataAggregator:
         real_order_path: str,
         exp_order_paths: List[str],
         df_pos: pd.DataFrame,
-        df_pos_participant_idx: int = 1
+        df_pos_participant_idx: int = 1,
+        sentence_metadata_path: str = None  # optional
     ):
         print(f"\n[DataAggregator] Initialising...")
         print(f"  Number of participants : {len(gazedata)}")
@@ -126,6 +127,10 @@ class DataAggregator:
         self.gazedata = gazedata
         self.df_pos = df_pos
         self.df_pos_participant_idx = df_pos_participant_idx
+
+        self.sentence_metadata = None
+        if sentence_metadata_path is not None:
+            self.sentence_metadata = self.load_sentence_metadata(sentence_metadata_path)
 
         print(f"\n[DataAggregator] Building mappers...")
         self.mappers: List[PresentationMapper] = [
@@ -179,6 +184,26 @@ class DataAggregator:
             translated.append(df)
 
         return translated
+    
+    def load_sentence_metadata(self, path: str) -> pd.DataFrame:
+        """
+        Load sentence metadata from combined_valid_sentences.xlsx.
+        Renames unnamed index column to real_index.
+        """
+        df = pd.read_excel(path, index_col=0)
+        df.index.name = "real_index"
+        df = df.reset_index()
+
+        print(f"[load_sentence_metadata] Loaded {len(df)} sentences")
+        print(f"  Columns: {df.columns.tolist()}")
+        print(f"\n  groupUnc unique values ({df['groupUnc'].nunique()}):")
+        print(f"    {df['groupUnc'].value_counts().to_dict()}")
+        print(f"\n  groupRes unique values ({df['groupRes'].nunique()}):")
+        print(f"    {df['groupRes'].value_counts().to_dict()}")
+        print(f"\n  groupVal unique values ({df['groupVal'].nunique()}):")
+        print(f"    {df['groupVal'].value_counts().to_dict()}")
+
+        return df
 
     def compute_gaze_fix_stats(self) -> pd.DataFrame:
         """Run gaze_fix_stats for all participants."""
@@ -216,8 +241,6 @@ class DataAggregator:
         return df_all
 
     def aggregate_by_sentence(self) -> pd.DataFrame:
-        """Aggregate gaze_fix_stats across participants by real_index."""
-        print(f"\n[DataAggregator] Aggregating by sentence (real_index)...")
         df_all = self.compute_gaze_fix_stats()
 
         result = (
@@ -232,11 +255,14 @@ class DataAggregator:
             .reset_index()
         )
 
-        print(f"  Aggregated {len(result)} sentences")
-        print(f"  Sentences with mean_gaze_samples > 0: {(result['mean_gaze_samples'] > 0).sum()}")
-        print(f"  Top 5 sentences by mean gaze samples:")
-        print(result.nlargest(5, "mean_gaze_samples")[
-            ["real_index", "mean_gaze_samples", "mean_fixations", "n_participants"]
-        ].to_string(index=False))
+        # Merge sentence metadata if available
+        if self.sentence_metadata is not None:
+            meta_cols = ["real_index", "groupUnc", "groupRes", "groupVal"]
+            result = result.merge(self.sentence_metadata[meta_cols], on="real_index", how="left")
+            print(f"  Merged sentence metadata — shape after merge: {result.shape}")
+
+            missing = result[result["groupUnc"].isna()]
+            if not missing.empty:
+                print(f"  WARNING: {len(missing)} sentences have no metadata")
 
         return result
