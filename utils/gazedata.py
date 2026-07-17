@@ -293,47 +293,129 @@ class GazeData:
 
     def get_total_horizontal_fixations(self, pres, df_position=None, y_line_threshold=0.03, part_nr=1, results=None, time_col="TIME"):
         """Count within_line_regression saccades inside the given part_nr,
-        restricted to saccades occurring at/after part 2's first gaze landing."""
+        restricted to saccades occurring at/after part 2's first gaze landing.
+
+        Kept for backward compatibility — equivalent to calling
+        `_saccade_type_counts(..., part_nr=part_nr, min_time=t_part2_start)[0]`.
+        """
         saccades = self.saccades_movement(pres, df_position=df_position, y_line_threshold=y_line_threshold)
 
         t_part2_start = self.get_part2_start_time(pres, df_position, results=results, time_col=time_col)
         if t_part2_start is None:
             return 0
 
-        mask = (
-            (saccades["saccade_type"] == "within_line_regression")
-            & (saccades["from_part"] == part_nr)
-            & (saccades["to_part"] == part_nr)
-            & (saccades["from_time"] >= t_part2_start)
-        )
-        return int(mask.sum())
+        horizontal, _ = self._saccade_type_counts(saccades, part_nr=part_nr, min_time=t_part2_start)
+        return horizontal
+
+    def _saccade_type_counts(self, saccades, part_nr=None, min_time=None):
+        """Count horizontal (within-line) and vertical (line-to-line) regression
+        saccades in a saccades DataFrame (as returned by saccades_movement).
+
+        part_nr: if given, restrict to saccades that stay within that part
+                 (from_part == to_part == part_nr).
+        min_time: if given, restrict to saccades whose origin fixation (from_time)
+                  occurs at/after this timestamp — used to isolate saccades that
+                  happen only after the second sentence has already been seen.
+
+        Returns (n_horizontal, n_vertical).
+        """
+        if saccades.empty:
+            return 0, 0
+
+        mask = pd.Series(True, index=saccades.index)
+        if part_nr is not None:
+            mask &= (saccades["from_part"] == part_nr) & (saccades["to_part"] == part_nr)
+        if min_time is not None:
+            mask &= (saccades["from_time"] >= min_time)
+
+        subset = saccades[mask]
+        n_horizontal = int((subset["saccade_type"] == "within_line_regression").sum())
+        n_vertical   = int((subset["saccade_type"] == "line_regression").sum())
+        return n_horizontal, n_vertical
+
+    def _fixation_counts_per_sentence(self, df_position, pres):
+        """Return (n_fixations_sentence1, n_fixations_sentence2) — the number of
+        valid, line-matched fixations landing in each part of the presentation."""
+        try:
+            fixations = self.assign_line_to_fixations(df_position, pres)
+        except (ValueError, KeyError):
+            return 0, 0
+
+        if fixations.empty:
+            return 0, 0
+
+        counts = fixations["part_nr"].value_counts()
+        return int(counts.get(1, 0)), int(counts.get(2, 0))
 
     def gaze_fix_stats(self, df_position, n_pres=97) -> pd.DataFrame:
-        """Return a DataFrame with regression gaze sample count
-        and fixation count per presentation."""
+        """Return a DataFrame with detailed, per-sentence fixation and
+        regression statistics for every presentation.
+
+        For each presentation this reports, per sentence (part 1 / part 2):
+        - total fixation count
+        - total horizontal regressions (within-line, leftward re-fixations)
+        - total vertical regressions (upward, line-to-line re-fixations)
+
+        It additionally reports, for sentence 1 only, the subset of horizontal
+        and vertical regressions that occur strictly *after* sentence 2 has
+        already been fixated at least once — i.e. re-reading behavior that
+        happens once both sentences have been seen. This used to be the only
+        thing this method measured; it's now one column group among several,
+        rather than something baked into every count.
+
+        Also reports the number of saccades that jump directly from sentence 2
+        back into sentence 1 (cross-sentence regressions), and the raw count of
+        part-1 gaze samples collected after sentence 2 first appeared.
+        """
         results = self.gaze_on_screen(df_position)
-        data = self.get_reg_gaze()
+        reg_gaze = self.get_reg_gaze()
 
         rows = []
-        for i in range(n_pres):
-            res = data.get((i, 1), {})
-            total_gaze = sum(len(df) for df in res.values())
+        for pres in range(n_pres):
+            n_fix_s1, n_fix_s2 = self._fixation_counts_per_sentence(df_position, pres)
 
             try:
-                fixations = self.filter_part2_to_part1_saccades(
-                    pres=i, df_position=df_position
-                )
-                total_fixations = len(fixations)
-            except ValueError:
-                total_fixations = 0
+                saccades = self.saccades_movement(pres, df_position=df_position)
+            except (ValueError, KeyError):
+                saccades = pd.DataFrame(columns=["from_part", "to_part", "from_time", "saccade_type"])
 
-            total_horizontal_fixations = self.get_total_horizontal_fixations(i, df_position, results=results)
+            horiz_s1, vert_s1 = self._saccade_type_counts(saccades, part_nr=1)
+            horiz_s2, vert_s2 = self._saccade_type_counts(saccades, part_nr=2)
+
+            t_part2_start = self.get_part2_start_time(pres, df_position, results=results)
+            if t_part2_start is not None:
+                horiz_s1_after, vert_s1_after = self._saccade_type_counts(
+                    saccades, part_nr=1, min_time=t_part2_start
+                )
+            else:
+                horiz_s1_after, vert_s1_after = 0, 0
+
+            try:
+                cross_sentence_regressions = len(
+                    self.filter_part2_to_part1_saccades(pres, df_position=df_position, saccades=saccades)
+                )
+            except (ValueError, KeyError):
+                cross_sentence_regressions = 0
+
+            reg_gaze_pres = reg_gaze.get((pres, 1), {})
+            gaze_samples_sentence1_after_sentence2 = sum(len(df) for df in reg_gaze_pres.values())
 
             rows.append({
-                "presentation": i,
-                "gaze_samples": total_gaze,
-                "fixations": total_fixations,
-                "horizontal_fixations": total_horizontal_fixations,
+                "presentation": pres,
+
+                "n_fixations_sentence1": n_fix_s1,
+                "n_fixations_sentence2": n_fix_s2,
+
+                "horizontal_regressions_sentence1": horiz_s1,
+                "vertical_regressions_sentence1": vert_s1,
+                "horizontal_regressions_sentence2": horiz_s2,
+                "vertical_regressions_sentence2": vert_s2,
+
+                "horizontal_regressions_sentence1_after_sentence2": horiz_s1_after,
+                "vertical_regressions_sentence1_after_sentence2": vert_s1_after,
+
+                "cross_sentence_regressions": cross_sentence_regressions,
+                "gaze_samples_sentence1_after_sentence2": gaze_samples_sentence1_after_sentence2,
             })
 
         return pd.DataFrame(rows)
@@ -402,8 +484,6 @@ class GazeData:
 
         mask = (saccades["from_part"] == 2) & (saccades["to_part"] == 1)
         return saccades[mask].reset_index(drop=True)
-
-    # ── Summary ──────────────────────────────────────────────────────────────
 
     def summary(self):
         """Print a quick overview of the gaze recording."""
@@ -531,13 +611,42 @@ class GazeData:
         fit_px = min(width_based_px, height_based_px, font_px)
         return self._px_to_fontsize(fig, ax, fit_px)
 
-    def plot_saccades_on_text(self, df_position, pres, saccades=None, show_gaze=False, results=None, font_px=40):
+    def plot_saccades_on_text(
+        self,
+        df_position,
+        pres,
+        saccades=None,
+        show_gaze=False,
+        results=None,
+        font_px=40,
+        show_cross_sentence=True,
+        show_within_sentence=True,
+        within_sentence_parts=(1, 2),
+        after_sentence2_only=False,
+    ):
+        """Plot saccades over the presented text.
+
+        show_cross_sentence   : draw saccades that jump directly from a sentence-2
+                                 fixation back into sentence 1 (cross_sentence_regressions).
+        show_within_sentence  : draw regressions (horizontal within-line + vertical
+                                 line-to-line) that stay inside a single sentence.
+        within_sentence_parts : which sentence(s) — 1, 2, or (1, 2) — to draw
+                                 within-sentence regressions for.
+        after_sentence2_only  : if True, restrict sentence-1 within-sentence
+                                 regressions to those occurring after sentence 2
+                                 has already been fixated at least once (i.e. the
+                                 old hardcoded "re-reading" behaviour). If False
+                                 (default), sentence-1 within-sentence regressions
+                                 are shown regardless of timing. Has no effect on
+                                 sentence 2, which can only be reached after
+                                 sentence 2 has already appeared.
+        """
         SACCADE_COLORS = {
-        "progressive"                        : "green",
-        "line_regression"                    : "red",
-        "within_line_regression"             : "orange",
-        "within_line_regression_part1"       : "gold",
+            "cross_sentence"            : "crimson",
+            "within_sentence_horizontal": "orange",
+            "within_sentence_vertical"  : "purple",
         }
+
         df_pres = df_position[df_position["presentation_index"] == pres].copy()
         if saccades is None:
             saccades = self.saccades_movement(pres, df_position=df_position)
@@ -545,21 +654,33 @@ class GazeData:
         if results is None:
             results = self.gaze_on_screen(df_position)
 
-        # Keep only saccades that jump from a part-2 fixation to a part-1 fixation
-        part2_to_part1 = self.filter_part2_to_part1_saccades(pres, df_position=df_position, saccades=saccades)
+        # Saccades that jump straight from a part-2 fixation to a part-1 fixation
+        cross_sentence = (
+            self.filter_part2_to_part1_saccades(pres, df_position=df_position, saccades=saccades)
+            if show_cross_sentence else saccades.iloc[0:0]
+        )
 
-        # Within-line regressions inside part 1, restricted to after part 2 first appeared
-        # (same cutoff used for the red gaze points and get_total_horizontal_fixations)
-        t_part2_start = self.get_part2_start_time(pres, df_position, results=results)
-        if t_part2_start is not None:
-            within_part1_horizontal = saccades[
-                (saccades["saccade_type"] == "within_line_regression")
-                & (saccades["from_part"] == 1)
-                & (saccades["to_part"] == 1)
-                & (saccades["from_time"] >= t_part2_start)
-            ].copy()
-        else:
-            within_part1_horizontal = saccades.iloc[0:0].copy()
+        # Within-sentence regressions (horizontal + vertical), for the requested part(s)
+        within_sentence = saccades.iloc[0:0].copy()
+        if show_within_sentence:
+            t_part2_start = self.get_part2_start_time(pres, df_position, results=results)
+            parts = (
+                within_sentence_parts
+                if isinstance(within_sentence_parts, (tuple, list))
+                else (within_sentence_parts,)
+            )
+            for part_nr in parts:
+                mask = (
+                    (saccades["from_part"] == part_nr) & (saccades["to_part"] == part_nr)
+                    & (saccades["saccade_type"].isin(["within_line_regression", "line_regression"]))
+                )
+                if part_nr == 1 and after_sentence2_only:
+                    if t_part2_start is None:
+                        mask &= False
+                    else:
+                        mask &= (saccades["from_time"] >= t_part2_start)
+                within_sentence = pd.concat([within_sentence, saccades[mask]])
+            within_sentence = within_sentence.drop_duplicates()
 
         fig_width = 12
         fig_height = fig_width * (SCREEN_H / SCREEN_W)
@@ -567,7 +688,14 @@ class GazeData:
         ax.set_xlim(0, SCREEN_W)
         ax.set_ylim(0, SCREEN_H)
         ax.invert_yaxis()
-        ax.set_title(f"Saccades — presentation {pres} (part 2 → part 1 regressions, part 1 horizontal regressions after part 2 start)")
+
+        title_bits = []
+        if show_cross_sentence:
+            title_bits.append("cross-sentence regressions")
+        if show_within_sentence:
+            scope = "after sentence 2 only" if after_sentence2_only else "all"
+            title_bits.append(f"within-sentence regressions ({scope})")
+        ax.set_title(f"Saccades — presentation {pres} ({', '.join(title_bits) or 'none selected'})")
         ax.set_xlabel("X (px)")
         ax.set_ylabel("Y (px)")
         plt.tight_layout()
@@ -608,23 +736,38 @@ class GazeData:
 
         fixations = self.assign_line_to_fixations(df_position, pres)
 
-        def _draw_saccades(sac_df, color_key_override=None):
+        def _draw_saccades(sac_df, color_key):
+            color = SACCADE_COLORS[color_key]
             for _, sac in sac_df.iterrows():
                 prev = fixations[fixations["FPOGID"] == sac["from_fpogid"]].iloc[0]
                 curr = fixations[fixations["FPOGID"] == sac["to_fpogid"]].iloc[0]
                 x0, y0 = prev["FPOGX"] * SCREEN_W, prev["FPOGY"] * SCREEN_H
                 x1, y1 = curr["FPOGX"] * SCREEN_W, curr["FPOGY"] * SCREEN_H
-                color = SACCADE_COLORS[color_key_override or sac["saccade_type"]]
                 ax.annotate("", xy=(x1, y1), xytext=(x0, y0),
                             arrowprops=dict(arrowstyle="->", color=color, alpha=0.8, lw=1.3), zorder=4)
 
-        _draw_saccades(part2_to_part1)
-        _draw_saccades(within_part1_horizontal, color_key_override="within_line_regression_part1")
+        _draw_saccades(cross_sentence, "cross_sentence")
+        if show_within_sentence:
+            _draw_saccades(
+                within_sentence[within_sentence["saccade_type"] == "within_line_regression"],
+                "within_sentence_horizontal",
+            )
+            _draw_saccades(
+                within_sentence[within_sentence["saccade_type"] == "line_regression"],
+                "within_sentence_vertical",
+            )
 
         from matplotlib.lines import Line2D
+        active_colors = {}
+        if show_cross_sentence:
+            active_colors["cross_sentence"] = SACCADE_COLORS["cross_sentence"]
+        if show_within_sentence:
+            active_colors["within_sentence_horizontal"] = SACCADE_COLORS["within_sentence_horizontal"]
+            active_colors["within_sentence_vertical"] = SACCADE_COLORS["within_sentence_vertical"]
         legend_elems = [Line2D([0], [0], color=c, lw=2, label=t.replace("_", " "))
-                        for t, c in SACCADE_COLORS.items()]
-        ax.legend(handles=legend_elems, loc="upper right", fontsize=8)
+                        for t, c in active_colors.items()]
+        if legend_elems:
+            ax.legend(handles=legend_elems, loc="upper right", fontsize=8)
 
         plt.show()
 
@@ -665,7 +808,24 @@ class GazeData:
         font_size = (box_width_px - spacing_total) / (n_chars * char_width_ratio)
         return max(font_size, 1)  # guard against negative/zero from bad data
 
-    def plot_gaze_on_text(self, df_position, pres, results=None, time_col="TIME", font_px=40):
+    def plot_gaze_on_text(
+        self,
+        df_position,
+        pres,
+        results=None,
+        time_col="TIME",
+        font_px=40,
+        split_by_sentence2_onset=True,
+    ):
+        """Plot gaze samples over the presented text.
+
+        split_by_sentence2_onset : if True (default), gaze samples are split into
+            'before sentence 2 appeared' (grey) and 'from sentence 2 onset onward'
+            (red), using the earliest gaze landing on any sentence-2 box as the
+            cutoff — matching the "after sentence 2" scope used elsewhere. If
+            False, all gaze samples are plotted in a single color with no
+            before/after distinction.
+        """
         df_pres = df_position[df_position["presentation_index"] == pres].copy()
 
         if results is None:
@@ -687,24 +847,25 @@ class GazeData:
         all_gaze = pd.concat(all_gaze).drop_duplicates().reset_index(drop=True)
 
         # ── Determine when part 2 starts (earliest gaze landing on any part-2 box) ──
-        part2_line_results = results.get((pres, 2), {})
-        part2_timestamps = [df_line[time_col].min() for df_line in part2_line_results.values() if not df_line.empty]
+        t_part2_start = None
+        if split_by_sentence2_onset:
+            part2_line_results = results.get((pres, 2), {})
+            part2_timestamps = [df_line[time_col].min() for df_line in part2_line_results.values() if not df_line.empty]
 
-        if not part2_timestamps:
-            print(f"[pres {pres}] WARNING: no gaze landed on part 2 boxes — can't determine part 2 start, nothing highlighted.")
-            t_part2_start = None
-        else:
-            t_part2_start = min(part2_timestamps)
+            if not part2_timestamps:
+                print(f"[pres {pres}] WARNING: no gaze landed on part 2 boxes — can't determine part 2 start, nothing highlighted.")
+            else:
+                t_part2_start = min(part2_timestamps)
 
-        # ── Split gaze into before / after part 2 start ─────────────────
+        # ── Split gaze into before / after part 2 start (if requested) ──
         if t_part2_start is not None:
             before = all_gaze[all_gaze[time_col] < t_part2_start]
             after  = all_gaze[all_gaze[time_col] >= t_part2_start]
+            print(f"[pres {pres}] total gaze: {len(all_gaze)} | before part 2: {len(before)} | from part 2 start onward: {len(after)}")
         else:
             before = all_gaze
             after = pd.DataFrame(columns=all_gaze.columns)
-
-        print(f"[pres {pres}] total gaze: {len(all_gaze)} | before part 2: {len(before)} | from part 2 start onward: {len(after)}")
+            print(f"[pres {pres}] total gaze: {len(all_gaze)}")
 
         # ── Plot ─────────────────────────────────────────────────────
         fig_width = 12
@@ -743,19 +904,26 @@ class GazeData:
                     ha="center", va="center", zorder=2
                 )
 
-        # Gaze before part 2 starts — grey
-        ax.scatter(
-            before["BPOGX"] * SCREEN_W,
-            before["BPOGY"] * SCREEN_H,
-            s=15, alpha=0.4, color="grey", zorder=3, label="before part 2"
-        )
-
-        # Gaze from part 2 start onward — soft yellow
-        if not after.empty:
+        if split_by_sentence2_onset:
+            # Gaze before part 2 starts — grey
             ax.scatter(
-                after["BPOGX"] * SCREEN_W,
-                after["BPOGY"] * SCREEN_H,
-                s=15, alpha=0.35, color="red", zorder=4, label="from part 2 start"
+                before["BPOGX"] * SCREEN_W,
+                before["BPOGY"] * SCREEN_H,
+                s=15, alpha=0.4, color="grey", zorder=3, label="before part 2"
+            )
+            # Gaze from part 2 start onward — red
+            if not after.empty:
+                ax.scatter(
+                    after["BPOGX"] * SCREEN_W,
+                    after["BPOGY"] * SCREEN_H,
+                    s=15, alpha=0.35, color="red", zorder=4, label="from part 2 start"
+                )
+        else:
+            # No before/after distinction — all gaze in one color
+            ax.scatter(
+                all_gaze["BPOGX"] * SCREEN_W,
+                all_gaze["BPOGY"] * SCREEN_H,
+                s=15, alpha=0.4, color="steelblue", zorder=3, label="gaze"
             )
 
         ax.legend(loc="upper right")
