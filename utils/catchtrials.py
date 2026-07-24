@@ -4,6 +4,33 @@ try:
     from .participant_data import load_all_participants
 except ImportError:  # pragma: no cover - fallback for direct script execution
     from participant_data import load_all_participants
+
+
+def add_conditions_by_sentence(catch_trials, conditions_df, catch_col="sentence_first", cond_col="Part 1"):
+    """Merge catch_trials with condition labels by matching sentence text."""
+    catch_trials = catch_trials.copy()
+    conditions_df = conditions_df.copy()
+
+    def normalize(s):
+        if pd.isna(s):
+            return s
+        return " ".join(str(s).strip().split())  # strip + collapse internal whitespace
+
+    catch_trials["_sentence_key"] = catch_trials[catch_col].apply(normalize)
+    conditions_df["_sentence_key"] = conditions_df[cond_col].apply(normalize)
+
+    condition_cols = ["_sentence_key", "Uncertainty", "Resolution", "Unc Valence", "Res Valence"]
+    condition_lookup = conditions_df[condition_cols].drop_duplicates(subset=["_sentence_key"])
+
+    merged = catch_trials.merge(condition_lookup, on="_sentence_key", how="left")
+
+    n_unmatched = merged["Uncertainty"].isna().sum()
+    if n_unmatched > 0:
+        print(f"WARNING: {n_unmatched} / {len(merged)} rows did not match any condition.")
+        print("Unmatched sentences:")
+        print(merged.loc[merged["Uncertainty"].isna(), catch_col].unique())
+
+    return merged.drop(columns=["_sentence_key"])
  
  
 class CatchTrials:

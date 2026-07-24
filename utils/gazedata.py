@@ -495,20 +495,48 @@ class GazeData:
         print(f"\nPupil stats:\n{self.pupil_stats()}")
 
     def sentence_durations(self):
-        """Return the duration (s) spent on each sentence presentation."""
+        """Return the duration (s) spent on each sentence presentation.
+
+        Onset/offset triggers can fire multiple times per presentation (e.g. logged
+        throughout the reading window rather than once), so we take the FIRST onset
+        and the FIRST offset per presentation before computing duration.
+        """
         onsets  = self.sentence_onsets()
         offsets = self.sentence_offsets()
 
         onsets["pres"]  = onsets["USER"].str.extract(r"PRES(\d+)").astype(int)
         offsets["pres"] = offsets["USER"].str.extract(r"PRES(\d+)").astype(int)
 
-        merged = pd.merge(
-            onsets[["pres", "TIME"]].rename(columns={"TIME": "onset"}),
-            offsets[["pres", "TIME"]].rename(columns={"TIME": "offset"}),
-            on="pres"
-        )
+        # collapse to one row per pres: the earliest onset, the earliest offset
+        onsets_first  = (onsets.sort_values("TIME")
+                                .drop_duplicates("pres", keep="first")
+                                [["pres", "TIME"]]
+                                .rename(columns={"TIME": "onset"}))
+        offsets_first = (offsets.sort_values("TIME")
+                                .drop_duplicates("pres", keep="first")
+                                [["pres", "TIME"]]
+                                .rename(columns={"TIME": "offset"}))
+
+        merged = pd.merge(onsets_first, offsets_first, on="pres")
         merged["duration"] = (merged["offset"] - merged["onset"]).round(2)
         return merged.sort_values("pres").reset_index(drop=True)
+
+    def sentence_durations_real_index(self, pres_to_real_map):
+        """Same as sentence_durations(), but with each row's canonical real_index
+        attached via the participant-specific presentation->real mapping.
+
+        pres_to_real_map: dict-like (e.g. pandas Series or dict) mapping
+                        presentation_index -> real_index, as produced by
+                        PresentationMapper.get_pres_to_real_map().
+        """
+        durations = self.sentence_durations()
+        durations["real_index"] = durations["pres"].map(pres_to_real_map)
+
+        unmapped = durations["real_index"].isna().sum()
+        if unmapped:
+            print(f"Warning: {unmapped} presentation(s) had no real_index mapping.")
+
+        return durations
     
     def sentence_duration_stats(self):
         """Summary stats on how long participants read each sentence."""
@@ -602,14 +630,58 @@ class GazeData:
         plt.tight_layout()
         plt.show()
 
-    def _fontsize_for_box(self, fig, ax, text, box_width_px, box_height_px, font_px=40):
-        """Return a font size in points that stays within a box."""
+    def _fontsize_for_box(self, fig, ax, text, box_width_px, box_height_px, font_px=None, tolerance=0.15):
+        """Return the font size (in points) to render `text` at, using the known
+        experiment font metrics (FONT_SIZE) rather than estimating from the box.
+
+        The box was measured directly in-browser at FONT_SIZE/CHAR_W, so we don't
+        derive a size from box_width_px — we just convert FONT_SIZE to points.
+        We do, however, sanity-check that the box's actual width/height are
+        consistent with what FONT_SIZE/CHAR_W/LINE_H predict, and warn loudly if
+        not (this would indicate a constants.py / CSS mismatch, not a plotting bug).
+        """
         if not text:
-            return self._px_to_fontsize(fig, ax, font_px)
-        width_based_px = self._derive_font_px_from_box(text, box_width_px)
-        height_based_px = max(box_height_px * 0.75, 1)
-        fit_px = min(width_based_px, height_based_px, font_px)
-        return self._px_to_fontsize(fig, ax, fit_px)
+            return self._px_to_fontsize(fig, ax, FONT_SIZE)
+
+        n_chars = len(text)
+        expected_width_px = n_chars * CHAR_W
+        expected_height_px = LINE_H
+
+        width_ratio = box_width_px / expected_width_px if expected_width_px else float("nan")
+        height_ratio = box_height_px / expected_height_px if expected_height_px else float("nan")
+
+        if not (1 - tolerance <= width_ratio <= 1 + tolerance):
+            print(
+                f"[_fontsize_for_box] WARNING: box width {box_width_px:.1f}px vs "
+                f"expected {expected_width_px:.1f}px ({n_chars} chars x CHAR_W={CHAR_W}) "
+                f"— ratio {width_ratio:.2f}. Check constants.py against the CSS used "
+                f"in measure_sentence_positions.html. Text: {text!r}"
+            )
+        if not (1 - tolerance <= height_ratio <= 1 + tolerance):
+            print(
+                f"[_fontsize_for_box] WARNING: box height {box_height_px:.1f}px vs "
+                f"expected LINE_H={expected_height_px}px — ratio {height_ratio:.2f}."
+            )
+
+        return self._px_to_fontsize(fig, ax, FONT_SIZE)
+
+    def _draw_spaced_text(self, ax, text, left, right, y_center, fontsize_pt, **text_kwargs):
+        """Draw text with characters evenly spaced to exactly fill [left, right],
+        matching the browser's letter-spacing rather than matplotlib's default
+        (zero) character spacing."""
+        n_chars = len(text)
+        if n_chars == 0:
+            return
+        box_width = right - left
+        advance = box_width / n_chars  # width allotted to each character, incl. spacing
+        for i, ch in enumerate(text):
+            x = left + (i + 0.5) * advance  # center of this character's slot
+            ax.text(
+                x, y_center, ch,
+                fontsize=fontsize_pt, family="Courier New",
+                ha="center", va="center", zorder=2,
+                **text_kwargs
+            )
 
     def plot_saccades_on_text(
         self,
@@ -718,11 +790,10 @@ class GazeData:
                 box_height_px,
                 font_px=font_px,
             )
-            ax.text(
-                (line["left"] + line["right"]) / 2,
+            self._draw_spaced_text(
+                ax, line["text"], line["left"], line["right"],
                 (line["top"] + line["bottom"]) / 2,
-                line["text"], fontsize=fontsize_pt, family="monospace", color="#111111",
-                ha="center", va="center", zorder=2
+                fontsize_pt, color="#111111"
             )
 
         if show_gaze:
@@ -898,10 +969,10 @@ class GazeData:
 
                 x_center = (line["left"] + line["right"]) / 2
                 y_center = (line["top"] + line["bottom"]) / 2
-                ax.text(
-                    x_center, y_center, line["text"],
-                    fontsize=fontsize_pt, family="monospace", color="#111111",
-                    ha="center", va="center", zorder=2
+                self._draw_spaced_text(
+                    ax, line["text"], line["left"], line["right"],
+                    (line["top"] + line["bottom"]) / 2,
+                    fontsize_pt, color="#111111"
                 )
 
         if split_by_sentence2_onset:
