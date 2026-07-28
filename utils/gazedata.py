@@ -79,6 +79,9 @@ class GazeData:
             "left" : [round(left.mean(), 2),  round(left.median(), 2),  left.count()],
             "right": [round(right.mean(), 2), round(right.median(), 2), right.count()],
         }, index=["mean", "median", "n_valid"])
+
+
+    
     
     # ── Triggers ─────────────────────────────────────────────────────────────
 
@@ -484,6 +487,173 @@ class GazeData:
 
         mask = (saccades["from_part"] == 2) & (saccades["to_part"] == 1)
         return saccades[mask].reset_index(drop=True)
+
+    # ── Pupil preprocessing ──────────────────────────────────────────────────
+
+    @staticmethod
+    def _mean_pupil_per_row(df):
+        """Per-row mean pupil diameter across both eyes, using only valid samples.
+
+        If both eyes are valid for a row, averages them. If only one eye is valid,
+        uses that one. If neither is valid, returns NaN for that row.
+        """
+        left  = df["LPD"].where(df["LPV"] == 1)
+        right = df["RPD"].where(df["RPV"] == 1)
+        return pd.concat([left, right], axis=1).mean(axis=1, skipna=True)
+
+    def get_pupil_baseline(self, pres):
+        """Baseline pupil size for a presentation, taken from the fixation-cross
+        period preceding it (FIXATION_ONSET_PRES{pres} -> SENTENCE_ONSET_PRES{pres}).
+
+        Returns the mean pupil diameter across both eyes' valid samples in that
+        window. Returns np.nan if no valid samples are found.
+        """
+        baseline_segment = self.gaze_during_fixation(pres)
+        baseline_pupil = self._mean_pupil_per_row(baseline_segment).dropna()
+
+        if baseline_pupil.empty:
+            return np.nan
+
+        return baseline_pupil.mean()
+
+    def get_normalized_pupil_timecourse(self, pres):
+        """Per-sample pupil dilation during the sentence-reading window of `pres`,
+        normalized so trials/sentences become comparable:
+
+        - norm_pupil_raw : absolute change from this trial's baseline
+                           (raw - baseline), same units as the original PD.
+        - norm_pupil_pct : percent change from this trial's baseline
+                           (raw - baseline) / baseline * 100
+        - time_pct       : position in the reading window as a percentage (0-100),
+                           so sentences of different durations can be aligned/averaged
+                           on a shared x-axis.
+        """
+        baseline = self.get_pupil_baseline(pres)
+        segment = self.gaze_during_pres(pres)
+
+        if segment.empty:
+            return pd.DataFrame(columns=[
+                "pres", "TIME", "time_pct", "raw_pupil", "baseline",
+                "norm_pupil_raw", "norm_pupil_pct"
+            ])
+
+        raw_pupil = self._mean_pupil_per_row(segment)
+
+        t_start = segment["TIME"].iloc[0]
+        t_end   = segment["TIME"].iloc[-1]
+        duration = t_end - t_start
+
+        time_pct = ((segment["TIME"] - t_start) / duration * 100) if duration else np.nan
+        norm_pupil_raw = (raw_pupil - baseline) if pd.notna(baseline) else np.nan
+        norm_pupil_pct = ((raw_pupil - baseline) / baseline * 100) if baseline else np.nan
+
+        out = pd.DataFrame({
+            "pres"          : pres,
+            "TIME"          : segment["TIME"].values,
+            "time_pct"      : time_pct.values if hasattr(time_pct, "values") else time_pct,
+            "raw_pupil"     : raw_pupil.values,
+            "baseline"      : baseline,
+            "norm_pupil_raw": norm_pupil_raw.values if hasattr(norm_pupil_raw, "values") else norm_pupil_raw,
+            "norm_pupil_pct": norm_pupil_pct.values if hasattr(norm_pupil_pct, "values") else norm_pupil_pct,
+        })
+
+        return out.dropna(subset=["raw_pupil"]).reset_index(drop=True)
+
+    def resample_pupil_to_pct_grid(self, pres, n_points=101):
+        """Resample this presentation's normalized pupil timecourse onto a fixed
+        percentage grid (0, 1, ..., 100 by default), via linear interpolation.
+
+        This is what makes trials comparable point-by-point: instead of each
+        presentation having pupil values at whatever irregular time_pct its own
+        samples happened to land on, every presentation now has exactly one
+        pupil value at each percentage point on a shared grid. That's what lets
+        you average/compare across sentences and presentations at matching
+        percentages later.
+
+        Returns a dataframe with columns: pres, time_pct, norm_pupil_raw, norm_pupil_pct
+        (one row per grid point). Rows are NaN where interpolation isn't
+        possible (e.g. presentation had no valid pupil samples).
+        """
+        df_pres = self.get_normalized_pupil_timecourse(pres)
+        grid = np.linspace(0, 100, n_points)
+
+        if df_pres.empty or df_pres["norm_pupil_pct"].dropna().empty:
+            return pd.DataFrame({
+                "pres": pres,
+                "time_pct": grid,
+                "norm_pupil_raw": np.nan,
+                "norm_pupil_pct": np.nan,
+            })
+
+        valid = df_pres.dropna(subset=["norm_pupil_pct"]).sort_values("time_pct")
+
+        interp_raw = np.interp(
+            grid,
+            valid["time_pct"].values,
+            valid["norm_pupil_raw"].values,
+            left=np.nan, right=np.nan,   # don't extrapolate beyond observed range
+        )
+        interp_pct = np.interp(
+            grid,
+            valid["time_pct"].values,
+            valid["norm_pupil_pct"].values,
+            left=np.nan, right=np.nan,
+        )
+
+        return pd.DataFrame({
+            "pres": pres,
+            "time_pct": grid,
+            "norm_pupil_raw": interp_raw,
+            "norm_pupil_pct": interp_pct,
+        })
+
+    def pupil_timecourse_all_presentations(self, n_pres=None):
+        """Baseline- and time-normalized pupil timecourse for every presentation
+        of this participant, stacked into one tidy dataframe (irregular time_pct,
+        one row per raw gaze sample — not grid-aligned).
+        """
+        if n_pres is None:
+            n_pres = self.n_presentations()
+
+        all_rows = []
+        for pres in range(n_pres):
+            try:
+                df_pres = self.get_normalized_pupil_timecourse(pres)
+            except (ValueError, KeyError) as e:
+                print(f"Warning: skipping presentation {pres} ({e})")
+                continue
+            if not df_pres.empty:
+                all_rows.append(df_pres)
+
+        if not all_rows:
+            return pd.DataFrame(columns=[
+                "pres", "TIME", "time_pct", "raw_pupil", "baseline",
+                "norm_pupil_raw", "norm_pupil_pct"
+            ])
+
+        return pd.concat(all_rows, ignore_index=True)
+
+    def pupil_timecourse_grid_all_presentations(self, n_pres=None, n_points=101):
+        """Grid-resampled pupil timecourse for every presentation, stacked.
+
+        Every presentation has one row per shared percentage point (0-100),
+        so you can group by time_pct and get a mean/CI pupil value at each
+        percentage across all trials — this is the dataframe you want for
+        cross-sentence / cross-presentation comparison.
+        """
+        if n_pres is None:
+            n_pres = self.n_presentations()
+
+        all_rows = []
+        for pres in range(n_pres):
+            try:
+                df_grid = self.resample_pupil_to_pct_grid(pres, n_points=n_points)
+            except (ValueError, KeyError) as e:
+                print(f"Warning: skipping presentation {pres} ({e})")
+                continue
+            all_rows.append(df_grid)
+
+        return pd.concat(all_rows, ignore_index=True)
 
     def summary(self):
         """Print a quick overview of the gaze recording."""
