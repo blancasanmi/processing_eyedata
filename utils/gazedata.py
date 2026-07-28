@@ -501,20 +501,68 @@ class GazeData:
         right = df["RPD"].where(df["RPV"] == 1)
         return pd.concat([left, right], axis=1).mean(axis=1, skipna=True)
 
-    def get_pupil_baseline(self, pres):
-        """Baseline pupil size for a presentation, taken from the fixation-cross
-        period preceding it (FIXATION_ONSET_PRES{pres} -> SENTENCE_ONSET_PRES{pres}).
-
-        Returns the mean pupil diameter across both eyes' valid samples in that
-        window. Returns np.nan if no valid samples are found.
+    def get_pupil_baseline(self, pres, window_size=0.5, step=0.05, min_start=0.75):
         """
-        baseline_segment = self.gaze_during_fixation(pres)
-        baseline_pupil = self._mean_pupil_per_row(baseline_segment).dropna()
+        ----------
+        window_size : float
+            Duration (s) of each candidate plateau window.
+        step : float
+            Step size (s) for sliding the candidate window.
+        min_start : float
+            Earliest start time (s, relative to fixation onset) a candidate
+            window is allowed to begin at, to exclude the initial adaptation
+            period.
 
-        if baseline_pupil.empty:
+        Returns
+        -------
+        float
+            Mean pupil diameter (both eyes, valid samples only) over the
+            detected plateau window. np.nan if no valid samples are found.
+        """
+        baseline_segment = self.gaze_during_fixation(pres).sort_values("TIME")
+        pupil = self._mean_pupil_per_row(baseline_segment)
+
+        valid = pd.DataFrame({
+            "TIME": baseline_segment["TIME"].values,
+            "pupil": pupil.values,
+        }).dropna()
+
+        if valid.empty:
             return np.nan
 
-        return baseline_pupil.mean()
+        t0 = valid["TIME"].iloc[0]
+        valid["t_rel"] = valid["TIME"] - t0
+        t_end = valid["t_rel"].iloc[-1]
+
+        # Not enough data to slide a window — fall back to the plain mean.
+        if t_end < window_size:
+            return valid["pupil"].mean()
+
+        latest_start = t_end - window_size
+        starts = np.arange(min(min_start, latest_start), latest_start, step)
+        if len(starts) == 0:
+            starts = [max(0, latest_start)]
+
+        candidates = []
+        for start in starts:
+            end = start + window_size
+            w = valid[(valid["t_rel"] >= start) & (valid["t_rel"] < end)]
+            if len(w) < 3:
+                continue
+            slope, _ = np.polyfit(w["t_rel"], w["pupil"], 1)
+            candidates.append((start, abs(slope), w["pupil"].mean()))
+
+        if not candidates:
+            # Fallback: just use the last window_size seconds.
+            w = valid[valid["t_rel"] >= latest_start]
+            return w["pupil"].mean() if not w.empty else valid["pupil"].mean()
+
+        cand_df = pd.DataFrame(candidates, columns=["start", "abs_slope", "mean_pupil"])
+        tolerance = cand_df["abs_slope"].min() * 1.1 + 1e-9  # 10% tolerance band above the flattest slope
+        flattest = cand_df[cand_df["abs_slope"] <= tolerance]
+        best = flattest.sort_values("start", ascending=False).iloc[0]  # prefer the latest (closest to sentence onset)
+
+        return best["mean_pupil"]
 
     def get_normalized_pupil_timecourse(self, pres):
         """Per-sample pupil dilation during the sentence-reading window of `pres`,
@@ -654,6 +702,39 @@ class GazeData:
             all_rows.append(df_grid)
 
         return pd.concat(all_rows, ignore_index=True)
+
+    def plot_pupil_during_fixation(self, pres, show_mean=True, window_size=0.5, step=0.05, min_start=0.75):
+        """Plot raw pupil diameter (both eyes) during the fixation-cross period
+        preceding a presentation, with the detected plateau baseline window
+        shaded, so you can visually confirm the plateau detection is sensible.
+        """
+        segment = self.gaze_during_fixation(pres)
+
+        if segment.empty:
+            print(f"No fixation-period gaze data for presentation {pres}")
+            return
+
+        t0 = segment["TIME"].iloc[0]
+
+        left  = segment[segment["LPV"] == 1]
+        right = segment[segment["RPV"] == 1]
+
+        plt.figure(figsize=(9, 4))
+        plt.plot(left["TIME"] - t0, left["LPD"], marker="o", markersize=3, alpha=0.7, label="Left")
+        plt.plot(right["TIME"] - t0, right["RPD"], marker="o", markersize=3, alpha=0.7, label="Right")
+
+        if show_mean:
+            baseline = self.get_pupil_baseline(pres, window_size=window_size, step=step, min_start=min_start)
+            if pd.notna(baseline):
+                plt.axhline(baseline, color="grey", linestyle="--", linewidth=1,
+                            label=f"plateau baseline ({baseline:.3f})")
+
+        plt.title(f"Pupil diameter during fixation period — presentation {pres}")
+        plt.xlabel("Time since fixation onset (s)")
+        plt.ylabel("Pupil diameter (mm)")
+        plt.legend()
+        plt.tight_layout()
+        plt.show()
 
     def summary(self):
         """Print a quick overview of the gaze recording."""
