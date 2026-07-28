@@ -14,6 +14,9 @@ class PresentationMapper:
         print(f"  real_order_path : {real_order_path}")
         print(f"  exp_order_path  : {exp_order_path}")
 
+        self.real_order_path = real_order_path
+        self.exp_order_path = exp_order_path
+
         self.sentence_order = self._load_sentence_order(real_order_path)
         print(f"  Loaded {len(self.sentence_order)} sentences from real_order")
         print(f"  First sentence : {self.sentence_order[0]!r}")

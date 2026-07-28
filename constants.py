@@ -13,3 +13,5 @@ TEXT_MAX_W = SCREEN_W * 0.90  # also from the experiment
 CHAR_W = FONT_SIZE * 0.6 + LETTER_SPACING   # ≈ 26px per character
 LINE_H = FONT_SIZE * LINE_HEIGHT  # 88px from the def in https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/line-height#:~:text=multiplied%20by%20the%20element%27s%20own%20font%20size 
 
+# in constants.py
+CALIBRATION_TOLERANCE_PX = 20  # gaze accuracy radius from calibration

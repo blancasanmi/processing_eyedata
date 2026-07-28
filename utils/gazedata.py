@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from constants import SCREEN_H, SCREEN_W, FONT_SIZE, CHAR_W, LINE_H
+from constants import SCREEN_H, SCREEN_W, FONT_SIZE, CHAR_W, LINE_H, CALIBRATION_TOLERANCE_PX
 
 class GazeData:
     def __init__(self, path):
@@ -183,10 +183,10 @@ class GazeData:
             fixations = self.get_fixation_sequence(pres)
 
         df_pres = df_position[df_position["presentation_index"] == pres].copy()
-        df_pres["top_norm"]    = df_pres["top"]    / SCREEN_H
-        df_pres["bottom_norm"] = df_pres["bottom"] / SCREEN_H
-        df_pres["left_norm"]   = df_pres["left"]   / SCREEN_W
-        df_pres["right_norm"]  = df_pres["right"]   / SCREEN_W
+        df_pres["top_norm"]    = (df_pres["top"]    - CALIBRATION_TOLERANCE_PX) / SCREEN_H
+        df_pres["bottom_norm"] = (df_pres["bottom"] + CALIBRATION_TOLERANCE_PX) / SCREEN_H
+        df_pres["left_norm"]   = (df_pres["left"]   - CALIBRATION_TOLERANCE_PX) / SCREEN_W
+        df_pres["right_norm"]  = (df_pres["right"]  + CALIBRATION_TOLERANCE_PX) / SCREEN_W
 
         rank_map = self._build_line_rank(df_position, pres)
 
@@ -233,10 +233,10 @@ class GazeData:
                 print(f"Warning: no gaze data found for presentation {pres}, skipping.")
                 continue
 
-            df_pres["top_norm"]    = df_pres["top"]    / SCREEN_H
-            df_pres["bottom_norm"] = df_pres["bottom"] / SCREEN_H
-            df_pres["left_norm"]   = df_pres["left"]   / SCREEN_W
-            df_pres["right_norm"]  = df_pres["right"]  / SCREEN_W
+            df_pres["top_norm"]    = (df_pres["top"]    - CALIBRATION_TOLERANCE_PX) / SCREEN_H
+            df_pres["bottom_norm"] = (df_pres["bottom"] + CALIBRATION_TOLERANCE_PX) / SCREEN_H
+            df_pres["left_norm"]   = (df_pres["left"]   - CALIBRATION_TOLERANCE_PX) / SCREEN_W
+            df_pres["right_norm"]  = (df_pres["right"]  + CALIBRATION_TOLERANCE_PX) / SCREEN_W
 
             for part_nr, df_part in df_pres.groupby("part_nr"):
                 line_results = {}
