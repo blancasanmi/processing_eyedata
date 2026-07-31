@@ -11,6 +11,7 @@ def load_pres_real_maps(sentence_order_path: str):
     real_to_pres = dict(zip(df["real_index"], df["presentation_index"]))
     return pres_to_real, real_to_pres
 
+
 class DataAggregator:
     META_COLS = ["real_index", "Uncertainty", "Resolution", "Unc Valence", "Res Valence"]
 
